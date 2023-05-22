@@ -17,7 +17,9 @@ class InstallmentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => null,
+            'loan_id' => null,
+            'amount' => $this->faker->randomFloat(2, 1000000, 100000000),
         ];
     }
 }

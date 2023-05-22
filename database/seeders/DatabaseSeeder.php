@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use \App\Models\User, \App\Models\Customer, \App\Models\Loan, \App\Models\Installment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +13,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory()
+            ->has(Customer::factory()->count(3)
+                ->has(Loan::factory()->count(3)
+                ->state(function (array $attributes, Customer $customer) {
+                    return ['user_id' => $customer->user_id];
+                })
+                    ->has(Installment::factory()->count(3)
+                    ->state(function (array $attributes, Loan $loan) {
+                        return ['user_id' => $loan->user_id];
+                    })
+                    )
+                )
+            )
+        ->create();
     }
 }

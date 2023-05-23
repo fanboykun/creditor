@@ -1,65 +1,66 @@
 <div x-data="{open: false}" class="flex-inline">
     <div class="block">
-         <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-10 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+         <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-10 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 shadow-lg" aria-label="Sidebar">
             @include('layouts.navigation-menu')
          </aside>
     </div>
 
-    <div class="sm:ml-64 bg-white/50">
+    <div class="bg-white fixed top-0 z-10 w-full sm:left-64 left-0 shadow-sm">
         <header aria-label="Site Header" class="border-b border-gray-100">
             <div class="mx-auto flex h-16 max-w-screen-2xl items-center justify-between sm:px-6 lg:px-8">
 
-              <div class="flex items-center gap-4">
-                <div class="sm:-mx-4 mx-4">
-                    <nav aria-label="Breadcrumb" class="flex py-2">
-                        <ol
-                        role="list"
-                        class="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600"
-                        >
-                        <li class="flex items-center">
-                            <a
-                            href="#"
-                            class="flex h-10 items-center gap-1.5 bg-gray-100 px-4 transition hover:text-gray-900"
-                            >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                                />
-                            </svg>
 
-                            <span class="ms-1.5 text-xs font-medium"> Home </span>
-                            </a>
-                        </li>
+            <div class="flex justify-between items-center w-full gap-4">
+                  <div class="sm:-mx-4 mx-4">
+                      <nav aria-label="Breadcrumb" class="flex py-2">
+                          <ol
+                          role="list"
+                          class="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600"
+                          >
+                          <li class="flex items-center">
+                              <a
+                              href="#"
+                              class="flex h-10 items-center gap-1.5 bg-gray-100 px-4 transition hover:text-gray-900"
+                              >
+                              <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="h-4 w-4"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                              >
+                                  <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                                  />
+                              </svg>
 
-                        <li class="relative flex items-center">
-                            <span
-                            class="absolute inset-y-0 -start-px h-10 w-4 bg-gray-100 [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180"
-                            >
-                            </span>
+                              <span class="ms-1.5 text-xs font-medium"> Home </span>
+                              </a>
+                          </li>
 
-                            <a
-                            href="#"
-                            class="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium transition hover:text-gray-900"
-                            >
-                            Shirts
-                            </a>
-                        </li>
-                        </ol>
-                    </nav>
-                </div>
+                          <li class="relative flex items-center">
+                              <span
+                              class="absolute inset-y-0 -start-px h-10 w-4 bg-gray-100 [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180"
+                              >
+                              </span>
+
+                              <a
+                              href="#"
+                              class="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium transition hover:text-gray-900"
+                              >
+                              Shirts
+                              </a>
+                          </li>
+                          </ol>
+                      </nav>
+                  </div>
               </div>
 
-              <div class="flex flex-1 items-center justify-end gap-8">
-                <div class="flex items-center">
+              <div class="fixed right-0 flex items-start justify-between gap-8">
+                <div class="flex items-start">
                   <div class="flex items-center border-x border-gray-100">
 
                     <div class="flex items-center ml-6">
@@ -108,35 +109,34 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
-
+                    <div class="flex items-center">
+                        <button x-on:click="open = ! open" type="button" class="p-2 lg:hidden">
+                            <svg
+                              class="h-6 w-6"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"
+                              />
+                            </svg>
+                          </button>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="flex items-center gap-4">
-                <button x-on:click="open = ! open" type="button" class="p-2 lg:hidden">
-                  <svg
-                    class="h-6 w-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  </svg>
-                </button>
-              </div>
 
             </div>
         </header>
     </div>
 
-    <div x-show="open" x-cloak class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div x-show="open" x-cloak class="relative z-20" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
         <!--
           Background backdrop, show/hide based on slide-over state.
 
@@ -151,7 +151,7 @@
 
         <div class="fixed inset-0 overflow-hidden">
           <div class="absolute inset-0 overflow-hidden">
-            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 mr-12">
               <!--
                 Slide-over panel, show/hide based on slide-over state.
 
@@ -173,7 +173,7 @@
                     From: "opacity-100"
                     To: "opacity-0"
                 -->
-                <div class="absolute p-0.5 left-0 top-0 -ml-8 flex mr-2 mt-5 sm:-ml-10 sm:mr-4 bg-white rounded-lg">
+                <div class="absolute p-2 right-0 top-0 flex -mr-11 mt-4 bg-white rounded-lg">
                   <button x-on:click="open = ! open" type="button" class="rounded-md text-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
                     <span class="sr-only">Close panel</span>
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">

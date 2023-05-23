@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="text-gray-900">
 
@@ -26,7 +26,7 @@
                           12%
                         </div>
                       </div>
-                      <h1 class="text-3xl sm:text-4xl xl:text-5xl font-bold text-gray-50 mt-12 group-hover:text-gray-50">42.34%</h1>
+                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50">{{ $customers_count }} Orang Nasabah</h1>
                       <div class="flex flex-row justify-between ">
                         <p>Total Nasabah Terdaftar Yang Meminjam</p>
                         <span>
@@ -41,7 +41,7 @@
                     </div>
                   </div>
                   <div class="w-full p-2 lg:w-1/4 md:w-1/2">
-                    <div class="flex flex-col px-6 py-10 overflow-hidden text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
+                    <div class="flex flex-col px-6 py-10 overflow-auto text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
                       <div class="flex flex-row justify-between items-center">
                         <div class="px-4 py-4 bg-gray-50  rounded-xl bg-opacity-30">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 20 20"
@@ -62,7 +62,7 @@
                           12%
                         </div>
                       </div>
-                      <h1 class="text-3xl sm:text-4xl xl:text-5xl font-bold text-gray-50 mt-12 group-hover:text-gray-50">42.34%</h1>
+                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50">Rp {{ number_format($loans_total, 0, ',', '.' ) }}</h1>
                       <div class="flex flex-row justify-between ">
                         <p>Total Uang Yang Dipinjamkan</p>
                         <span>
@@ -98,7 +98,7 @@
                           12%
                         </div>
                       </div>
-                      <h1 class="text-3xl sm:text-4xl xl:text-5xl font-bold text-gray-50 mt-12 group-hover:text-gray-50">42.34%</h1>
+                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50">Rp {{ number_format($paid_installments, 0, ',', '.' ) }}</h1>
                       <div class="flex flex-row justify-between ">
                         <p>Total Pinjaman Yang Sudah Dibayar</p>
                         <span>
@@ -113,7 +113,7 @@
                     </div>
                   </div>
                   <div class="w-full p-2 lg:w-1/4 md:w-1/2">
-                    <div class="flex flex-col px-6 py-10 overflow-hidden text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
+                    <div class="flex flex-col px-6 py-10 overflow-auto text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
                       <div class="flex flex-row justify-between items-center">
                         <div class="px-4 py-4 bg-gray-50  rounded-xl bg-opacity-30">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 20 20"
@@ -134,7 +134,7 @@
                           12%
                         </div>
                       </div>
-                      <h1 class="text-3xl sm:text-4xl xl:text-5xl font-bold text-gray-50 mt-12 group-hover:text-gray-50">42.34%</h1>
+                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50">Rp {{ number_format($remaining_installments, 0, ',', '.' ) }}</h1>
                       <div class="flex flex-row justify-between ">
                         <p>Total Pinjaman Yang Belum Dibayar</p>
                         <span>
@@ -153,4 +153,4 @@
 
         </div>
     </div>
-</x-app-layout>
+</div>

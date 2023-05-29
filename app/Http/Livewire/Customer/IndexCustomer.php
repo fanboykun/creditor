@@ -10,7 +10,7 @@ class IndexCustomer extends Component
     public $s;
     protected $perPage;
     protected $queryString = ['s' => ['except' => '']];
-    public string $tab = 'card';
+    public string $tab = 'table';
 
     public function render() : \Illuminate\View\View
     {

@@ -31,28 +31,46 @@
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"></path>
                             </svg>
-                            Tambah Produk
+                            Tambah Nasabah Baru
                         </a>
                     </div>
                 </div>
+
+                <div class="shadow-md mb-4 -mt-2">
+                    <ul class="flex flex-wrap justify-center -mb-px text-sm font-medium text-center text-gray-500">
+                        <li class="mr-2">
+                            <button wire:click="$set('tab', 'grid')" class="inline-flex p-4 border-b-2 {{ $tab == 'grid' ? 'text-blue-600 border-blue-600' : 'border-transparent hover:border-gray-300' }} rounded-t-lg group" aria-current="page">
+                                <svg aria-hidden="true" class="w-5 h-5 mr-2 {{ $tab == 'grid' ? 'text-blue-600' : 'text-gray-400' }}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                                Grid
+                            </button>
+                        </li>
+                        <li class="mr-2">
+                            <button wire:click="$set('tab', 'table')" class="inline-flex p-4 border-b-2 {{ $tab == 'table' ? 'text-blue-600 border-blue-600' : 'border-transparent hover:border-gray-300' }} rounded-t-lg group">
+                                <svg aria-hidden="true" class="w-5 h-5 mr-2 {{ $tab == 'table' ? 'text-blue-600' : 'text-gray-400' }}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
+                                Table
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
                 @if($tab == 'table')
                 <!-- Table -->
                 <div class="overflow-x-auto max-h-96">
-                    <table class="w-full text-sm text-left text-gray-500 ">
+                    <table class="w-full table-auto text-sm text-left text-gray-500 ">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-4 py-3">ID</th>
+                            <tr class="">
+                                <th scope="col" class="px-4 py-3 w-4">ID</th>
                                 <th scope="col" class="px-4 py-3">Nama</th>
-                                <th scope="col" class="px-4 py-3">Alamat</th>
+                                <th scope="col" class="px-4 py-3 min-w-64">Alamat</th>
                                 <th scope="col" class="px-4 py-3">No Telp</th>
                                 <th scope="col" class="px-4 py-3">No Ktp</th>
-                                <th scope="col" class="px-4 py-3"></th>
+                                <th scope="col" class="px-4 py-3">Menu</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($customers as $customer)
-                                <tr class="border-b hover:bg-gray-100">
-                                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+                                <tr class="border-b hover:bg-gray-100 {{ $loop->even ? 'bg-gray-50' : '' }}">
+                                    <td class="px-4 w-4 py-2 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $customer->id }}
                                     </td>
                                     <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
@@ -67,7 +85,7 @@
                                     <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $customer->card_number }}
                                     </td>
-                                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap ">
+                                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
                                         <div class="flex gap-x-2 justify-center">
                                             <div class="relative top-0 left-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600/90">
                                                 <a href="http://tembong.test/blog/molestiae-qui-nulla">
@@ -98,12 +116,11 @@
                         </tbody>
                     </table>
                 </div>
-
-                @else
+                @elseif($tab == 'grid')
                 <!-- Card -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 justify-center">
-
-                    <div class="w-full max-w-xs bg-white border border-gray-200 rounded-lg shadow justify-center">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-4 gap-x-2 justify-center pb-4">
+                    @forelse ($customers as $customer)
+                    <div class="w-full max-w-xs bg-white border border-indigo-500 rounded-lg shadow-lg shadow-indigo-600/40 mx-auto">
                         <div class="flex justify-end px-4">
                             <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500  hover:bg-gray-100  focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg text-sm p-1.5" type="button">
                                 <span class="sr-only">Open dropdown</span>
@@ -118,42 +135,76 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="flex flex-col items-center pb-2">
-                            <h5 class="mb-1 text-xl font-medium text-gray-900 ">Bonnie Green</h5>
-                            <div class="flex justify-start px-4 w-full border-y-2 py-2">
-                                <span class="text-sm items-start text-gray-500 ">ID : 123123</span>
+                        <div class="flex flex-col items-center">
+                            <h5 class="mb-1 text-xl font-medium text-gray-900 ">{{ $customer->name }}</h5>
+                            <div class="grid gap-y-2">
+                                <div class="grid grid-cols-2 border-b">
+                                    <div class="px-4 w-full">
+                                        <span class="text-sm items-start text-gray-900 ">ID</span>
+                                    </div>
+                                    <div class="px-4 w-full">
+                                        <span class="text-sm items-start text-gray-900 ">{{ $customer->id }}</span>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 border-b">
+                                    <div class="px-4 w-full">
+                                        <span class="text-sm items-start text-gray-900 ">No Telpon</span>
+                                    </div>
+                                    <div class="px-4 w-full">
+                                        <span class="text-sm items-start text-gray-900 ">{{ $customer->phone }}</span>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 border-b">
+                                    <div class="px-4 w-full">
+                                        <span class="text-sm items-start text-gray-900 ">Pinjaman Berjalan</span>
+                                    </div>
+                                    <div class="px-4 w-full">
+                                        <span class="text-sm font-semibold items-start text-indigo-800 ">Rp 1.000.000</span>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 border-b">
+                                    <div class="px-4 w-full">
+                                        <span class="text-sm items-start text-gray-900 ">Pinjaman Berjalan Terbayar</span>
+                                    </div>
+                                    <div class="px-4 w-full">
+                                        <span class="text-sm font-semibold items-start text-emerald-600 ">Rp 800.000</span>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 border-b">
+                                    <div class="px-4 w-full">
+                                        <span class="text-sm items-start text-gray-900 ">Pinjaman Berjalan Belum Terbayar</span>
+                                    </div>
+                                    <div class="px-4 w-full">
+                                        <span class="text-sm font-semibold items-start text-red-500">Rp 200.000</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex justify-start px-4 w-full border-y-2 py-2">
-                                <span class="text-sm items-start text-gray-500 ">ID : 123123</span>
-                            </div>
-                            {{-- <div class="relative z-0 w-full mb-6 group">
-                                <input type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
-                            </div> --}}
-
-                            <div class="inline-flex rounded-md shadow-sm mt-4" role="group">
-                                <button type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-l-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white ">
+                            <div class="inline-flex rounded-md shadow-sm mb-2 mt-4" role="group">
+                                <button type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900/50 rounded-l-lg hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-1 focus:ring-gray-200 focus:bg-indigo-700 focus:text-white ">
                                     <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path></svg>
                                     Profile
                                 </button>
-                                <button type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white ">
+                                <button type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-gray-900/50 hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-1 focus:ring-gray-200 focus:bg-indigo-700 focus:text-white ">
                                     <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
                                     Settings
                                 </button>
-                                <button type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-r-md hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white ">
+                                <button type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900/50 rounded-r-md hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-1 focus:ring-gray-200 focus:bg-indigo-700 focus:text-white ">
                                     <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd"></path></svg>
                                     Downloads
                                 </button>
                             </div>
-
                         </div>
                     </div>
+                    @empty
+                    <div class="flex lg:col-span-3 mx-auto w-full justify-center py-4">
+                        <h5 class="mb-1 text-xl font-medium text-gray-900/80 font-mono">Belum Ada Data !!!</h5>
+                    </div>
+                    @endforelse
 
                 </div>
-
                 @endif
                 <!-- Pagination -->
-                <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0" aria-label="Table navigation">
+                {{-- <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0" aria-label="Table navigation">
                     <span class="text-sm font-normal text-gray-500 ">
                         Menampilkan
                         <span class="font-semibold text-gray-900 ">{{ count($customers) }}</span>
@@ -163,7 +214,7 @@
                     <button type="button" wire:click="loadMore()" class="text-sm font-normal text-indigo-600 ">
                         Muat Lebih ...
                     </button>
-                </nav>
+                </nav> --}}
             </div>
         </div>
     </section>

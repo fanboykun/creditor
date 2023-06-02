@@ -8,9 +8,9 @@ use Livewire\Component;
 class IndexCustomer extends Component
 {
     public $s;
-    protected $perPage;
+    protected $perPage = 10;
     protected $queryString = ['s' => ['except' => '']];
-    public string $tab = 'table';
+    public string $tab = 'grid';
 
     public function render() : \Illuminate\View\View
     {

@@ -16,12 +16,12 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen min-w-full bg-gray-100">
+        <div class="h-fit min-w-full bg-gray-100">
             @include('layouts.navigation')
 
             <!-- Page Content -->
             <main>
-                <div class="px-3 py-4 sm:ml-64 bg-white/50 rounded-lg mt-16">
+                <div class="px-1 py-1 sm:ml-64 bg-white/50 rounded-lg mt-16">
                     {{ $slot }}
                  </div>
             </main>

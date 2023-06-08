@@ -15,10 +15,18 @@ class IndexInstallment extends Component
 
     public function render()
     {
-        $installments = Installment::with('loan.customer', 'user')
-        ->where('loan_id', 'like', '%'.$this->s.'%')
+        // $installments = Installment::with('loan.customer', 'user')
+        // ->where('loan_id', 'like', '%'.$this->s.'%')
+        // ->latest()
+        // ->paginate($this->perPage);
+
+        $installments =Installment::with('loan.customer', 'user')
         ->latest()
-        ->paginate($this->perPage);
+        ->get()
+        ->groupBy(function ($item) {
+            return $item->created_at->format('Y-m-d');
+        });
+        // dd($installments);
 
 
         // $installments = DB::table('installments')

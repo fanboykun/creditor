@@ -1,11 +1,11 @@
 <div x-data="{open: false}" class="flex-inline">
     <div class="block">
-         <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-10 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 shadow-lg" aria-label="Sidebar">
+         <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-10 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 shadow-md shadow-slate-900" aria-label="Sidebar">
             @include('layouts.navigation-menu')
          </aside>
     </div>
 
-    <div class="bg-white fixed top-0 z-10 w-full sm:left-64 left-0 shadow-sm">
+    <div class="bg-white fixed top-0 z-10 w-full sm:left-64 left-0">
         <header aria-label="Site Header" class="border-b border-gray-100">
             <div class="mx-auto flex h-16 max-w-screen-2xl items-center justify-between sm:px-6 lg:px-8">
 
@@ -136,7 +136,10 @@
         </header>
     </div>
 
-    <div x-show="open" x-cloak class="relative z-20" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div
+        x-cloak
+        x-show="open"
+        class="relative z-20" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
         <!--
           Background backdrop, show/hide based on slide-over state.
 
@@ -147,11 +150,18 @@
             From: "opacity-100"
             To: "opacity-0"
         -->
-        <div class="fixed inset-0 bg-gray-300 bg-opacity-50 blur-sm transition-opacity"></div>
+        <div
+        x-transition:enter="ease-in-out duration-500"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in-out duration-500"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 bg-gray-300 bg-opacity-50 blur-md transition-opacity"></div>
 
         <div class="fixed inset-0 overflow-hidden">
           <div class="absolute inset-0 overflow-hidden">
-            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 mr-12">
+            <div  class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 mr-12">
               <!--
                 Slide-over panel, show/hide based on slide-over state.
 
@@ -162,7 +172,13 @@
                   From: "translate-x-0"
                   To: "translate-x-full"
               -->
-              <div class="pointer-events-auto relative w-screen max-w-md">
+              <div
+              x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700"
+              x-transition:enter-start="translate-x-full"
+              x-transition:enter-end="translate-x-0"
+              x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
+              x-transition:leave-start="translate-x-0"
+              x-transition:leave-end="translate-x-full" class="pointer-events-auto relative w-screen max-w-md">
                 <!--
                   Close button, show/hide based on slide-over state.
 
@@ -173,8 +189,8 @@
                     From: "opacity-100"
                     To: "opacity-0"
                 -->
-                <div class="absolute p-2 right-0 top-0 flex -mr-11 mt-4 bg-white rounded-lg">
-                  <button x-on:click="open = ! open" type="button" class="rounded-md text-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+                <div class="absolute p-2 right-0 top-0 flex -mr-11 mt-4 bg-slate-800 rounded-lg">
+                  <button x-on:click="open = ! open" type="button" class="rounded-md text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
                     <span class="sr-only">Close panel</span>
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -182,7 +198,7 @@
                   </button>
                 </div>
 
-                <div class="flex h-full flex-col overflow-y-scroll bg-white py-2 shadow-xl">
+                <div class="flex h-full flex-col overflow-y-scroll bg-slate-800 py-2 shadow-xl shadow-slate-900">
                   <div class="relative flex-1">
                     @include('layouts.navigation-menu')
                   </div>

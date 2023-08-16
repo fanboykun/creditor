@@ -26,7 +26,7 @@
                           12%
                         </div>
                       </div>
-                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50">{{ $customers_count }} Orang Nasabah</h1>
+                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50">{{ $customers_count }} <span class="text-sm">Orang Nasabah</span></h1>
                       <div class="flex flex-row justify-between ">
                         <p>Total Nasabah Terdaftar Yang Meminjam</p>
                         <span>

@@ -43,7 +43,7 @@
                         </form>
                     </div>
                     <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <a href="http://tembong.test/create-product" class="flex items-center justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
+                        <a href="{{ route('customers.create') }}" class="flex items-center justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"></path>
                             </svg>
@@ -55,24 +55,23 @@
                 <!-- Content -->
                 <div class="overflow-x-auto max-h-96">
                     <table class="w-full table-auto text-sm text-left text-gray-500">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 sticky top-0 whitespace-nowrap z-50">
-                            <tr>
-                                <th scope="col" class="px-4 py-3"></th>
+                        <thead class="w-full text-xs text-gray-700 uppercase bg-gray-50 sticky top-0 whitespace-pre-line z-10">
+                            <tr class="bg-gray-50">
+                                <th scope="col" class="w-6"></th>
                                 <th scope="col" class="px-4 py-3">Nama Nasabah</th>
-                                <th scope="col" class="px-4 py-3 min-w-64">Jumlah Pinjaman</th>
-                                <th scope="col" class="px-4 py-3">Jumlah Pembayaran Cicilan</th>
-                                <th scope="col" class="px-4 py-3">Tanggal Dibayar</th>
+                                <th scope="col" class="px-4 py-3 text-right">Jumlah Pembayaran Cicilan</th>
+                                <th scope="col" class="px-4 py-3 text-center">Tanggal Dibayar</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="min-w-full">
                         @foreach ($installments as $installment_dates => $installment_data)
                             <tr>
-                                <td colspan="5" class="bg-slate-800 shadow-md text-white text-md p-2 font-bold sticky top-10 mt-10 rounded-lg z-50">
+                                <td colspan="5" class="bg-slate-800 shadow-md text-white text-md px-2 py-2 font-bold sticky top-10 sm:mt-15 sm:top-15 mt-12 rounded-lg z-10">
                                     <span class="flex ml-4 items-center justify-center"> {{ Carbon\Carbon::createFromDate($installment_dates)->format('d F Y') }} </span>
                                 </td>
                             </tr>
                                 @forelse ($installment_data as $installment)
-                                    <tr class="border-b hover:bg-gray-100 items-center even:bg-slate-50 whitespace-nowrap">
+                                    <tr class="border-b hover:bg-gray-100 items-center even:bg-slate-50">
                                         <td>
                                             <x-dropdown align="left" width="48">
                                                 <x-slot name="trigger">
@@ -98,18 +97,14 @@
                                                 </x-slot>
                                             </x-dropdown>
                                         </td>
-                                        <td class="px-4 py-2 font-medium text-gray-900">
+                                        <td class="px-4 py-2 font-medium text-gray-900 break-words">
                                             {{ $installment->loan->customer->name }}
                                             <span class="text-sm text-gray-400 ml-1 block">ID Nasabah : {{ $installment->loan->customer->id }}</span>
                                         </td>
-                                        <td class="px-4 py-2 font-medium text-gray-900 text-right">
-                                        Rp {{ number_format($installment->loan->amount, 0, ',', '.' ) }}
-                                        <span class="text-sm text-gray-400 ml-1 block">ID Cicilan : {{ $installment->loan->id }}</span>
-                                        </td>
-                                        <td class="px-4 py-2 font-medium text-gray-900 text-right items-center">
+                                        <td class="px-4 py-2 font-medium text-gray-900 text-right items-center break-words">
                                         Rp {{ number_format($installment->amount, 0, ',', '.' ) }}
                                         </td>
-                                        <td class="px-4 py-2 font-medium text-gray-900">
+                                        <td class="px-4 py-2 font-medium text-gray-900 text-center break-words">
                                             {{ $installment->created_at->format('H:i-l, d/F/Y') }}
                                             <span class="text-sm text-gray-400 ml-1 block">Oleh : {{ $installment->user->name }}</span>
                                         </td>

@@ -10,6 +10,9 @@ class Loan extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'customer_id', 'amount', 'interest', 'total', 'paid', 'remaining', 'status', 'start_date', 'end_date', 'note'];
+    protected $casts = [
+        'status' => 'boolean'
+    ];
 
     public function user() : \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

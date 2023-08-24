@@ -79,7 +79,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($customers as $customer)
+                                    @forelse ($customers as $customer)
                                         <tr class="border-b hover:bg-gray-100 even:bg-slate-50">
                                             <td class="px-4 w-4 py-2 font-medium text-gray-900">
                                                 {{ $customer->id }}
@@ -123,7 +123,11 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="9" class="px-4 py-2 text-center">Data Tidak Ditemukan</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -151,7 +155,7 @@
                                         </x-slot>
                                         <x-slot name="content" class="shadow-xl">
                                             <x-dropdown-link :href="route('profile.edit')">
-                                                {{ __('Profile') }}
+                                                {{ __('Profil Nasabah') }}
                                             </x-dropdown-link>
                                             <x-dropdown-link :href="route('profile.edit')">
                                                 {{ __('Lihat Semua Pinjaman') }}
@@ -215,20 +219,12 @@
                                             <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
                                             Bayar Cicilan
                                         </button>
-                                        {{-- <button type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-gray-900/50 hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-1 focus:ring-gray-200 focus:bg-indigo-700 focus:text-white ">
-                                            <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
-                                            Pinjaman
-                                        </button>
-                                        <button type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900/50 rounded-r-md hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-1 focus:ring-gray-200 focus:bg-indigo-700 focus:text-white ">
-                                            <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd"></path></svg>
-                                            Cicilan
-                                        </button> --}}
                                     </div>
                                 </div>
                             </div>
                             @empty
                             <div class="flex lg:col-span-3 mx-auto w-full justify-center py-4">
-                                <h5 class="mb-1 text-xl font-medium text-gray-900/80 font-mono">Belum Ada Data !!!</h5>
+                                <h5 class="mb-1 text-md font-medium text-gray-900/80 font-mono">Data Tidak Ditemukan</h5>
                             </div>
                             @endforelse
                         </div>

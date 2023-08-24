@@ -30,7 +30,7 @@
                 <!-- Header -->
                 <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                     <div class="w-full md:w-1/2">
-                        <form class="flex items-center">
+                        <div class="flex items-center">
                             <label for="simple-search" class="sr-only">Search</label>
                             <div class="relative w-full">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -40,10 +40,10 @@
                                 </div>
                                 <input wire:model.debounce.500="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari cicilan berdasarkan id" required="">
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <a href="{{ route('customers.create') }}" class="flex items-center justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
+                        <a href="{{ route('installments.create') }}" class="flex items-center justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"></path>
                             </svg>
@@ -64,7 +64,7 @@
                             </tr>
                         </thead>
                         <tbody class="min-w-full">
-                        @foreach ($installments as $installment_dates => $installment_data)
+                        @forelse ($installments as $installment_dates => $installment_data)
                             <tr>
                                 <td colspan="5" class="bg-slate-800 shadow-md text-white text-md px-2 py-2 font-bold sticky top-10 sm:mt-15 sm:top-15 mt-12 rounded-lg z-10">
                                     <span class="flex ml-4 items-center justify-center"> {{ Carbon\Carbon::createFromDate($installment_dates)->format('d F Y') }} </span>
@@ -110,9 +110,15 @@
                                         </td>
                                     </tr>
                                 @empty
-                                <p>No Data</p>
+                                <tr>
+                                    <td colspan="9" class="px-4 py-2 text-center">No Data Found</td>
+                                </tr>
                                 @endforelse
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="9" class="px-4 py-2 text-center">Data Tidak Ditemukan</td>
+                        </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

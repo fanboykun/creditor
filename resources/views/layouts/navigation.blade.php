@@ -11,7 +11,7 @@
 
 
             <div class="flex justify-between items-center w-full gap-4">
-                  <div class="sm:-mx-4 mx-4">
+                  {{-- <div class="sm:-mx-4 mx-4">
                       <nav aria-label="Breadcrumb" class="flex py-2">
                           <ol
                           role="list"
@@ -56,7 +56,7 @@
                           </li>
                           </ol>
                       </nav>
-                  </div>
+                  </div> --}}
               </div>
 
               <div class="fixed right-0 flex items-start justify-between gap-8">

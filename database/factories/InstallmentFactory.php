@@ -19,7 +19,7 @@ class InstallmentFactory extends Factory
         return [
             'user_id' => null,
             'loan_id' => null,
-            'amount' => $this->faker->randomFloat(2, 1000000, 100000000),
+            'amount' => $this->faker->randomFloat(0, 1000000, 10000000),
         ];
     }
 }

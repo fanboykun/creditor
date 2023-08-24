@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
                 ->state(function (array $attributes, Customer $customer) {
                     return ['user_id' => $customer->user_id];
                 })
-                    ->has(Installment::factory()->count(3)
-                    ->state(function (array $attributes, Loan $loan) {
-                        return ['user_id' => $loan->user_id];
-                    })
-                    )
+                    // ->has(Installment::factory()->count(3)
+                    // ->state(function (array $attributes, Loan $loan) {
+                    //     return ['user_id' => $loan->user_id];
+                    // })
+                    // )
                 )
             )
         ->create();

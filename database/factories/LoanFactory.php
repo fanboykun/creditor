@@ -19,14 +19,13 @@ class LoanFactory extends Factory
         return [
             'user_id' => null,
             'customer_id' => null,
-            'amount' => $this->faker->randomFloat(2, 1000000, 100000000),
-            'interest' => $this->faker->randomFloat(2, 0, 100),
-            'total' => $this->faker->randomFloat(2, 1000000, 100000000),
-            'paid' => $this->faker->randomFloat(2, 0, 100000000),
-            'remaining' => $this->faker->randomFloat(2, 0, 100000000),
-            'status' => $this->faker->boolean,
-            'start_date' => $this->faker->date(),
-            'end_date' => $this->faker->date(),
+            'amount' => $this->faker->randomFloat(0, 1000000, 100000000),
+            'interest' => $this->faker->randomFloat(0, 1, 3),
+            // 'duration' => $this->faker->numberBetween(1, 12),
+            'duration' => 1,
+            'status' => false,
+            'start_date' => now(),
+            'end_date' => \Carbon\Carbon::now()->addDays(30),
             'note' => $this->faker->text,
         ];
     }

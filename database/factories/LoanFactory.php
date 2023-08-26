@@ -21,8 +21,6 @@ class LoanFactory extends Factory
             'customer_id' => null,
             'amount' => $this->faker->randomFloat(0, 1000000, 100000000),
             'interest' => $this->faker->randomFloat(0, 1, 3),
-            // 'duration' => $this->faker->numberBetween(1, 12),
-            'duration' => 1,
             'status' => false,
             'start_date' => now(),
             'end_date' => \Carbon\Carbon::now()->addDays(30),

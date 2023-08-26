@@ -31,12 +31,6 @@ return new class extends Migration
                 $table->timestamps();
             });
         }
-        // Schema::table('loans', function (Blueprint $table) {
-        //     // $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
-        //     // $table->foreign('customer_id')->references('id')->on('customers')->nullOnDelete();
-        //     $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-        //     $table->foreignId('customer_id')->constrained('customers')->nullOnDelete();
-        // });
 
     }
 

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Loan extends Model
 {
     use HasFactory;
-
+    public $defaultInterest = 3;
     protected $fillable = ['user_id', 'customer_id', 'amount', 'interest', 'total', 'paid', 'remaining', 'status', 'start_date', 'end_date', 'note'];
     protected $casts = [
         'status' => 'boolean'

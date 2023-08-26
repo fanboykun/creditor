@@ -17,13 +17,11 @@ class DatabaseSeeder extends Seeder
             ->has(Customer::factory()->count(3)
                 ->has(Loan::factory()->count(3)
                 ->state(function (array $attributes, Customer $customer) {
-                    return ['user_id' => $customer->user_id];
+                    return [
+                        'user_id' => $customer->user_id,
+                        'total' => (int) $attributes['amount'] + (($attributes['amount'] * $attributes['interest']) / 100),
+                    ];
                 })
-                    // ->has(Installment::factory()->count(3)
-                    // ->state(function (array $attributes, Loan $loan) {
-                    //     return ['user_id' => $loan->user_id];
-                    // })
-                    // )
                 )
             )
         ->create();

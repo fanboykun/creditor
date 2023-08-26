@@ -12,7 +12,15 @@
                         <div class="flex items-center flex-1 space-x-4">
                             <h5>
                                 <span class="text-gray-500">Total Uang Yang Dipinjamkan</span>
-                                <span class="font-bold text-lg text-indigo-900">Rp {{ number_format($loans->sum('amount'), 0, ',', '.') }}</span>
+                                <span class="font-bold text-lg text-indigo-900">Rp {{ number_format($totalAmount, 0, ',', '.') }}</span>
+                            </h5>
+                            <h5>
+                                <span class="text-gray-500">Total Uang Dengan Bunga</span>
+                                <span class="font-bold text-lg text-indigo-900">Rp {{ number_format($totalAmountWithInterest, 0, ',', '.') }}</span>
+                            </h5>
+                            <h5>
+                                <span class="text-gray-500">Proyeksi Keuntungan</span>
+                                <span class="font-bold text-lg text-indigo-900">Rp {{ number_format($profitProjection, 0, ',', '.') }}</span>
                             </h5>
                         </div>
                     </div>
@@ -47,6 +55,7 @@
                                 <th scope="col" class="px-4 py-3">ID</th>
                                 <th scope="col" class="px-4 py-3">Nasabah</th>
                                 <th scope="col" class="px-4 py-3">Jumlah</th>
+                                <th scope="col" class="px-4 py-3">Total</th>
                                 <th scope="col" class="px-4 py-3">Terbayar</th>
                                 <th scope="col" class="px-4 py-3">Sisa</th>
                                 <th scope="col" class="px-4 py-3">Status</th>
@@ -67,6 +76,10 @@
                                     Rp {{ number_format($loan->amount, 0, ',', '.') }}
                                 </td>
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+                                    Rp {{ number_format($loan->total, 0, ',', '.') }}
+                                    <span class="block text-xs font-light text-gray-600">{{ $loan->interest }} %</span>
+                                </td>
+                                <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
                                     Rp {{ number_format($loan->paid, 0, ',', '.') }}
                                 </td>
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
@@ -74,14 +87,14 @@
                                 </td>
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap ">
                                     @if ($loan->status == true)
-                                    <div class="flex items-center">
+                                    <div class="flex items-right">
                                         <div class="inline-block w-4 h-4 mr-2 bg-green-700 rounded-full"></div>
-                                        Lunas
+                                        {{-- Lunas --}}
                                     </div>
                                     @else
-                                    <div class="flex items-center">
+                                    <div class="flex items-right">
                                         <div class="inline-block w-4 h-4 mr-2 bg-red-700 rounded-full"></div>
-                                       Belum Lunas
+                                       {{-- Belum Lunas --}}
                                     </div>
                                     @endif
                                 </td>

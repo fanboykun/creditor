@@ -24,8 +24,8 @@
                     <div class="sm:col-span-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nasabah <span class="text-red-400 text-xs">*</span></label>
                         <div class="relative">
-                            <input type="text" id="customer_id" name="customer_id" wire:model.defer="customer_id" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Pilih Nasabah" required>
-                            <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 ">Cari Nasabah</button>
+                            <input type="text" readonly id="selected_customer_info" name="selected_customer_info" value="{{ $selected_customer_info }}" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Pilih Nasabah" required>
+                            <button type="button" wire:click="$emit('openModal', 'loan.search-customer-modal')" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 ">Cari Nasabah</button>
                         </div>
                         @error('customer_id')
                         <span class="text-red-400 text-xs">{{ $message }}</span>
@@ -44,16 +44,56 @@
                         @enderror
                     </div>
                     <div class="w-full">
-                        <label for="duration" class="block mb-2 text-sm font-medium text-gray-900">Durasi Pinjaman <span class="text-red-400 text-xs">*</span></label>
-                        <input type="number" name="duration" max="10" id="duration" wire:model.defer="duration" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Masukan durasi pinjaman, misal 1 atau 2 (bulan)" required="">
-                        @error('duration')
+                        <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Bunga <span class="text-red-400 text-xs">*</span></label>
+                        <input type="number" name="interest_rate" id="interest_rate" wire:model.defer="interest_rate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                        @error('interest_rate')
                             <span class="text-red-400 text-xs">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="w-full">
-                        <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Bunga <span class="text-red-400 text-xs">*</span></label>
-                        <input type="number" name="interest_rate" id="interest_rate" wire:model.defer="interest_rate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
-                        @error('interest_rate')
+                        <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Dimulai Cicilan <span class="text-red-400 text-xs">*</span></label>
+                        <input type="date" name="start_date" id="start_date" wire:model.debounce="start_date" value="{{ $start_date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                        <div class="flex mt-2 ml-1">
+                            <div class="flex items-center h-5">
+                                <input id="isTodaySelected" aria-describedby="isTodaySelected" wire:model.debounce="isTodaySelected" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            </div>
+                            <div class="ml-2 text-sm">
+                                <button type="button" wire:click="$toggle('isTodaySelected')" for="helper-checkbox" class="font-medium text-gray-900">Pilih Tanggal Hari Ini</button>
+                                <p id="helper-checkbox-text" class="text-xs font-normal text-gray-500">{{ now()->format('d/m/Y') }}</p>
+                            </div>
+                        </div>
+                        @error('start_date')
+                            <span class="text-red-400 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="w-full">
+                        <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Akhir Cicilan <span class="text-red-400 text-xs">*</span></label>
+                        <input type="date" name="end_date" id="end_date" wire:model.debounce="end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                        <div class="flex mt-2 ml-1">
+                            <div class="flex items-center h-5">
+                                <input id="one_month" {{ $start_date == null ? 'disabled' : '' }} aria-describedby="helper-checkbox-text" type="checkbox" value="" {{ $duration == 1 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            </div>
+                            <div class="ml-2 text-sm">
+                                <button wire:click="setEndDate(1)" type="button" class="font-medium text-gray-900">1 Bulan</button>
+                            </div>
+                        </div>
+                        <div class="flex mt-2 ml-1">
+                            <div class="flex items-center h-5">
+                                <input id="two_month" {{ $start_date == null ? 'disabled' : '' }}  aria-describedby="helper-checkbox-text" type="checkbox" value="" {{ $duration == 2 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            </div>
+                            <div class="ml-2 text-sm">
+                                <button wire:click="setEndDate(2)" type="button" class="font-medium text-gray-900">2 Bulan</button>
+                            </div>
+                        </div>
+                        <div class="flex mt-2 ml-1">
+                            <div class="flex items-center h-5">
+                                <input id="three_month" {{ $start_date == null ? 'disabled' : '' }}  aria-describedby="helper-checkbox-text" type="checkbox" value="" {{ $duration == 3 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            </div>
+                            <div class="ml-2 text-sm">
+                                <button wire:click="setEndDate(3)" type="button" class="font-medium text-gray-900">3 Bulan</button>
+                            </div>
+                        </div>
+                        @error('end_date')
                             <span class="text-red-400 text-xs">{{ $message }}</span>
                         @enderror
                     </div>

@@ -19,7 +19,7 @@ class IndexLoan extends Component
         $this->totalAmount = Loan::sum('amount');
         $this->totalAmountWithInterest = Loan::sum('total');
         $this->profitProjection = $this->totalAmountWithInterest - $this->totalAmount;
-        $loans = Loan::with('customer', 'user')->where('id', 'like', '%'.$this->s.'%')->paginate($this->perPage);
+        $loans = Loan::with('customer', 'user')->where('id', 'like', '%'.$this->s.'%')->latest()->paginate($this->perPage);
         return view('livewire.loan.index-loan', [
             'loans' => $loans
         ]);

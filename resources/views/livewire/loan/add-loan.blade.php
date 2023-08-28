@@ -19,15 +19,15 @@
     <section class="bg-gray-50">
         <div class="bg-white rounded-xl mt-8 shadow-xl border-1 py-4 px-12 mx-auto max-w-4xl lg:py-4">
             <h2 class="mb-4 text-2xl font-bold text-gray-700">Tambah Peminjaman Baru</h2>
-            <form wire:submit.prevent="addNewLoan">
+            <form wire:submit.prevent="addNewLoan()">
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                     <div class="sm:col-span-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nasabah <span class="text-red-400 text-xs">*</span></label>
                         <div class="relative">
-                            <input type="text" readonly id="selected_customer_info" name="selected_customer_info" value="{{ $selected_customer_info }}" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Pilih Nasabah" required>
+                            <input type="text" readonly id="selected_customer_info" name="selected_customer_info" wire:model="selected_customer_info" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Pilih Nasabah" required>
                             <button type="button" wire:click="$emit('openModal', 'loan.search-customer-modal')" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 ">Cari Nasabah</button>
                         </div>
-                        @error('customer_id')
+                        @error('selected_customer_info')
                         <span class="text-red-400 text-xs">{{ $message }}</span>
                         @enderror
                     </div>
@@ -37,7 +37,7 @@
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                               <span class="text-sm text-gray-700">Rp</span>
                             </div>
-                            <input type="number" id="amount" wire:model.defer="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5">
+                            <input type="number" id="amount" wire:model.defer="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" required>
                         </div>
                         @error('amount')
                             <span class="text-red-400 text-xs">{{ $message }}</span>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="w-full">
                         <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Dimulai Cicilan <span class="text-red-400 text-xs">*</span></label>
-                        <input type="date" name="start_date" id="start_date" wire:model.debounce="start_date" value="{{ $start_date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                        <input type="date" name="start_date" id="start_date" required wire:model.debounce="start_date" value="{{ $start_date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
                         <div class="flex mt-2 ml-1">
                             <div class="flex items-center h-5">
                                 <input id="isTodaySelected" aria-describedby="isTodaySelected" wire:model.debounce="isTodaySelected" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
@@ -68,7 +68,7 @@
                     </div>
                     <div class="w-full">
                         <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Akhir Cicilan <span class="text-red-400 text-xs">*</span></label>
-                        <input type="date" name="end_date" id="end_date" wire:model.debounce="end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                        <input type="date" name="end_date" id="end_date" wire:model.debounce="end_date" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
                         <div class="flex mt-2 ml-1">
                             <div class="flex items-center h-5">
                                 <input id="one_month" {{ $start_date == null ? 'disabled' : '' }} aria-describedby="helper-checkbox-text" type="checkbox" value="" {{ $duration == 1 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">

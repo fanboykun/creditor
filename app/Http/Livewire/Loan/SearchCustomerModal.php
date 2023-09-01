@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Loan;
 
-use LivewireUI\Modal\ModalComponent;
+use Livewire\Component;
 use App\Models\Customer;
 
-class SearchCustomerModal extends ModalComponent
+class SearchCustomerModal extends Component
 {
     public int $perPage = 10;
     public string $search = '';
@@ -29,7 +29,7 @@ class SearchCustomerModal extends ModalComponent
     {
         $this->emit('customerSelected', $customer);
         $this->search = '';
-        $this->closeModal();
+        $this->dispatchBrowserEvent('close');
     }
 
 }

@@ -191,7 +191,7 @@
                                                 <span class="text-sm items-start text-gray-900 ">Pinjaman Berjalan</span>
                                             </div>
                                             <div class="px-4 w-full">
-                                                <span class="text-sm font-semibold items-start text-indigo-800 ">{{ number_format($customer->loans->first()->amount, 0, ',', '.' ) }}</span>
+                                                <span class="text-sm font-semibold items-start text-indigo-800 ">{{ number_format($customer->loans->first()->total, 0, ',', '.' ) }}</span>
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-2 border-b">

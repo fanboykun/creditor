@@ -17,9 +17,11 @@ class DatabaseSeeder extends Seeder
             ->has(Customer::factory()->count(3)
                 ->has(Loan::factory()->count(1)
                 ->state(function (array $attributes, Customer $customer) {
+                    $total = (int) $attributes['amount'] + (($attributes['amount'] * $attributes['interest']) / 100);
                     return [
                         'user_id' => $customer->user_id,
-                        'total' => (int) $attributes['amount'] + (($attributes['amount'] * $attributes['interest']) / 100),
+                        'total' => (int) $total,
+                        'remaining' => (int) $total,
                     ];
                 })
                 )

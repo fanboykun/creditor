@@ -16,7 +16,11 @@ class SearchCustomerModal extends Component
             $query->where('id', 'like', '%'.$this->search.'%')
                 ->orWhere('name', 'like', '%'.$this->search.'%')
                 ->orWhere('card_number', 'like', '%'.$this->search.'%');
-        })->paginate($this->perPage);
+        })
+        ->whereDoesntHave('loans', function($q){
+            $q->where('status', false);
+        })
+        ->paginate($this->perPage);
         return view('livewire.loan.search-customer-modal', compact('customers'));
     }
 

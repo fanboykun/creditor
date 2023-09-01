@@ -191,7 +191,7 @@
                                                 <span class="text-sm items-start text-gray-900 ">Pinjaman Berjalan</span>
                                             </div>
                                             <div class="px-4 w-full">
-                                                <span class="text-sm font-semibold items-start text-indigo-800 ">Rp 1.000.000</span>
+                                                <span class="text-sm font-semibold items-start text-indigo-800 ">{{ number_format($customer->loans->first()->amount, 0, ',', '.' ) }}</span>
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-2 border-b">
@@ -199,7 +199,7 @@
                                                 <span class="text-sm items-start text-gray-900 ">Pinjaman Berjalan Terbayar</span>
                                             </div>
                                             <div class="px-4 w-full">
-                                                <span class="text-sm font-semibold items-start text-emerald-600 ">Rp 800.000</span>
+                                                <span class="text-sm font-semibold items-start text-emerald-600 ">Rp {{ number_format($customer->loans->first()->paid), 0, ',', '.'  }}</span>
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-2 border-b">
@@ -207,7 +207,7 @@
                                                 <span class="text-sm items-start text-gray-900 ">Pinjaman Berjalan Belum Terbayar</span>
                                             </div>
                                             <div class="px-4 w-full">
-                                                <span class="text-sm font-semibold items-start text-red-500">Rp 200.000</span>
+                                                <span class="text-sm font-semibold items-start text-red-500">Rp {{ number_format($customer->loans->first()->remaining, 0, ',', '.' ) }}</span>
                                             </div>
                                         </div>
                                     </div>

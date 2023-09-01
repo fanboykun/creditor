@@ -69,31 +69,45 @@
                     </div>
                     <div class="w-full">
                         <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Akhir Cicilan <span class="text-red-400 text-xs">*</span></label>
-                        <input type="date" name="end_date" id="end_date" wire:model.debounce="end_date" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
-                        <div class="flex mt-2 ml-1">
-                            <div class="flex items-center h-5">
-                                <input id="one_month" {{ $start_date == null ? 'disabled' : '' }} aria-describedby="helper-checkbox-text" type="checkbox" value="" {{ $duration == 1 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                        <input type="date" name="end_date" id="end_date" {{ $start_date == null ? 'disabled' : ''}} wire:model.debounce="end_date" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                        @if($start_date != null)
+                            <div class="flex mt-2 ml-1 py-2">
+                                <div class="ml-2 text-sm">
+                                    <button wire:click="setEndDate(1)" type="button" class="font-medium text-gray-900 p-1.5 border-2 rounded-lg border-indigo-600/50 hover:bg-indigo-700 hover:text-white">1 Bulan</button>
+                                </div>
+                                <div class="flex items-center h-5">
+                                    @if($start_date != null && $duration == 1)
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mt-2 text-blue-700">
+                                        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                                    </svg>
+                                    @endif
+                                </div>
                             </div>
-                            <div class="ml-2 text-sm">
-                                <button wire:click="setEndDate(1)" type="button" class="font-medium text-gray-900">1 Bulan</button>
+                            <div class="flex mt-2 ml-1 py-2">
+                                <div class="ml-2 text-sm">
+                                    <button wire:click="setEndDate(2)" type="button" class="font-medium text-gray-900 p-1.5 border-2 rounded-lg border-indigo-600/50 hover:bg-indigo-700 hover:text-white">2 Bulan</button>
+                                </div>
+                                <div class="flex items-center h-5">
+                                    @if($start_date != null && $duration == 2)
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mt-2 text-blue-700">
+                                        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                                    </svg>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex mt-2 ml-1">
-                            <div class="flex items-center h-5">
-                                <input id="two_month" {{ $start_date == null ? 'disabled' : '' }}  aria-describedby="helper-checkbox-text" type="checkbox" value="" {{ $duration == 2 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <div class="flex mt-2 ml-1 py-2">
+                                <div class="ml-2 text-sm">
+                                    <button wire:click="setEndDate(3)" type="button" class="font-medium text-gray-900 p-1.5 border-2 rounded-lg border-indigo-600/50 hover:bg-indigo-700 hover:text-white">3 Bulan</button>
+                                </div>
+                                <div class="flex items-center h-5">
+                                    @if($start_date != null && $duration == 3)
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mt-2 text-blue-700">
+                                        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                                    </svg>
+                                    @endif
+                                </div>
                             </div>
-                            <div class="ml-2 text-sm">
-                                <button wire:click="setEndDate(2)" type="button" class="font-medium text-gray-900">2 Bulan</button>
-                            </div>
-                        </div>
-                        <div class="flex mt-2 ml-1">
-                            <div class="flex items-center h-5">
-                                <input id="three_month" {{ $start_date == null ? 'disabled' : '' }}  aria-describedby="helper-checkbox-text" type="checkbox" value="" {{ $duration == 3 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            </div>
-                            <div class="ml-2 text-sm">
-                                <button wire:click="setEndDate(3)" type="button" class="font-medium text-gray-900">3 Bulan</button>
-                            </div>
-                        </div>
+                        @endif
                         @error('end_date')
                             <span class="text-red-400 text-xs">{{ $message }}</span>
                         @enderror

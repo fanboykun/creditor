@@ -7,6 +7,7 @@ use App\Models\Loan;
 use Livewire\Component;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Livewire\Redirector;
 
 class AddLoan extends Component
@@ -47,17 +48,21 @@ class AddLoan extends Component
         if( !Customer::find($c_id)->exists()){
             return;
         };
+        if($this->checkIsHaveActiveLoan($c_id)){
+            return;
+        }
         $this->saveLoan($c_id);
     }
 
     private function saveLoan(int $c_id): Redirector|RedirectResponse {
         $this->validate();
         $loan = new Loan;
-        $loan->customer_id = auth()->id();
+        $loan->user_id = auth()->id();
         $loan->customer_id = $c_id;
         $loan->amount = $this->amount;
         $loan->interest = $this->interest_rate;
         $loan->total = $this->getTotal($this->amount, $this->interest_rate);
+        $loan->remaining = $this->getTotal($this->amount, $this->interest_rate);
         $loan->status = $this->status;
         $loan->start_date = $this->start_date;
         $loan->end_date = $this->end_date;
@@ -97,5 +102,15 @@ class AddLoan extends Component
     private function getTotal(int $amount, float $rate) : float
     {
         return $amount + ($amount * $rate / 100);
+    }
+
+    private function checkIsHaveActiveLoan(int $c_id) : bool
+    {
+        $check = DB::table('loans')
+        ->where('customer_id', $c_id)
+        ->whereExists(function($q){
+            $q->where('status', false);
+        })->first();
+        return is_null($check);
     }
 }

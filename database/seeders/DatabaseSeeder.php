@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()
             ->has(Customer::factory()->count(3)
-                ->has(Loan::factory()->count(3)
+                ->has(Loan::factory()->count(1)
                 ->state(function (array $attributes, Customer $customer) {
                     return [
                         'user_id' => $customer->user_id,

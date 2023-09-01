@@ -14,7 +14,13 @@ class IndexCustomer extends Component
 
     public function render() : \Illuminate\View\View
     {
-        $customers = Customer::where('name', 'like', '%'.$this->s.'%')->orWhere('phone', 'like', '%'.$this->s.'%')->latest()->paginate($this->perPage);
+        $customers = Customer::where('name', 'like', '%'.$this->s.'%')
+        ->orWhere('phone', 'like', '%'.$this->s.'%')
+        ->with('loans', function($query) {
+            $query->inactive()->first();
+        })
+        ->latest()->paginate($this->perPage);
+        // dd($customers);
         return view('livewire.customer.index-customer', ['customers' => $customers]);
     }
 

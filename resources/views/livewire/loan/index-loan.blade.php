@@ -104,7 +104,7 @@
                                     </div>
                                 </td>
                                 <td class="px-4 py-2 text-xs break-words">
-                                    <a href="" class="hover:bg-blue-200 text-blue-800 text-xs font-normal mr-2 px-2.5 py-0.5 rounded-md border border-blue-400 inline-flex items-center justify-center">
+                                    <a href="{{ route('loans.show', $loan->id) }}" class="hover:bg-blue-200 text-blue-800 text-xs font-normal mr-2 px-2.5 py-0.5 rounded-md border border-blue-400 inline-flex items-center justify-center">
                                         Detail
                                     </a>
                                 </td>

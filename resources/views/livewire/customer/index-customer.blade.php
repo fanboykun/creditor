@@ -154,19 +154,20 @@
                                             </button>
                                         </x-slot>
                                         <x-slot name="content" class="shadow-xl">
-                                            <x-dropdown-link :href="route('profile.edit')">
+                                            <x-dropdown-link :href="route('customers.profile', $customer)">
                                                 {{ __('Profil Nasabah') }}
                                             </x-dropdown-link>
-                                            <x-dropdown-link :href="route('profile.edit')">
+                                            <x-dropdown-link :href="route('customers.list-loan', $customer)">
                                                 {{ __('Lihat Semua Pinjaman') }}
                                             </x-dropdown-link>
-                                            <x-dropdown-link :href="route('profile.edit')">
+                                            <x-dropdown-link :href="route('customers.list-installment', $customer)">
                                                 {{ __('Lihat Semua Cicilan') }}
                                             </x-dropdown-link>
                                         </x-slot>
                                     </x-dropdown>
                                 </div>
                                 <div class="flex flex-col items-center">
+                                    {{-- {{ $customer->loans }} --}}
                                     <h5 class="mb-1 text-xl font-medium text-gray-900 ">{{ $customer->name }}</h5>
                                     <div class="grid gap-y-2">
                                         <div class="grid grid-cols-2 border-b">
@@ -211,14 +212,14 @@
                                         </div>
                                     </div>
                                     <div class="inline-flex rounded-md shadow-sm mb-2 mt-4" role="group">
-                                        <button type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900/50 rounded-l-lg hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-1 focus:ring-gray-200 focus:bg-indigo-700 focus:text-white ">
+                                        <a href="{{ route('customers.new-loan', $customer->id) }}" type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900/50 rounded-l-lg hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-1 focus:ring-gray-200 focus:bg-indigo-700 focus:text-white ">
                                             <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
                                             Pinjaman Baru
-                                        </button>
-                                        <button type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900/50 rounded-r-lg hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-1 focus:ring-gray-200 focus:bg-indigo-700 focus:text-white ">
+                                        </a>
+                                        <a href="{{ route('customers.active-installment', $customer) }}" type="button" class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900/50 rounded-r-lg hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-1 focus:ring-gray-200 focus:bg-indigo-700 focus:text-white ">
                                             <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
                                             Bayar Cicilan
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

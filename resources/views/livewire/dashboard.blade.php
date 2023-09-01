@@ -62,7 +62,7 @@
                           12%
                         </div>
                       </div>
-                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50">Rp {{ number_format($loans_total, 0, ',', '.' ) }}</h1>
+                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50"><span class="text-sm"> Rp </span> {{ number_format($loans_total, 0, ',', '.' ) }}</h1>
                       <div class="flex flex-row justify-between ">
                         <p>Total Uang Yang Dipinjamkan</p>
                         <span>
@@ -98,7 +98,7 @@
                           12%
                         </div>
                       </div>
-                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50">Rp {{ number_format($paid_installments, 0, ',', '.' ) }}</h1>
+                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50"><span class="text-sm"> Rp </span>{{ number_format($paid_installments, 0, ',', '.' ) }}</h1>
                       <div class="flex flex-row justify-between ">
                         <p>Total Pinjaman Yang Sudah Dibayar</p>
                         <span>
@@ -134,7 +134,7 @@
                           12%
                         </div>
                       </div>
-                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50">Rp {{ number_format($remaining_installments, 0, ',', '.' ) }}</h1>
+                      <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50"><span class="text-sm"> Rp </span> {{ number_format($remaining_installments, 0, ',', '.' ) }}</h1>
                       <div class="flex flex-row justify-between ">
                         <p>Total Pinjaman Yang Belum Dibayar</p>
                         <span>

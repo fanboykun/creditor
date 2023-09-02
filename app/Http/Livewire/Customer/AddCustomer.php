@@ -34,6 +34,7 @@ class AddCustomer extends Component
 
         session()->flash('message', 'Customer has been created successfully!');
         $this->resetInputFields();
+        return redirect()->route('customers.index');
     }
 
     private function resetInputFields()

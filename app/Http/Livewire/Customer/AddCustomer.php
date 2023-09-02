@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Customer;
 
 use App\Models\Customer;
+use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
+use Livewire\Redirector;
 
 class AddCustomer extends Component
 {
@@ -14,7 +16,7 @@ class AddCustomer extends Component
         return view('livewire.customer.add-customer');
     }
 
-    public function addNewCustomer()
+    public function addNewCustomer() : Redirector|RedirectResponse
     {
         $this->validate([
             'name' => 'required|string|max:255',
@@ -32,9 +34,9 @@ class AddCustomer extends Component
         $customer->card_number = $this->card_number;
         $customer->save();
 
-        session()->flash('message', 'Customer has been created successfully!');
+        // session()->flash('success', 'Customer has been created successfully!');
         $this->resetInputFields();
-        return redirect()->route('customers.index');
+        return redirect()->route('customers.index')->with('success', 'Customer has been created successfully!');
     }
 
     private function resetInputFields()

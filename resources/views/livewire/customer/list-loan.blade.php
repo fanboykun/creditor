@@ -6,23 +6,19 @@
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         <div class="flex">
                             <h2 class="font-semibold text-xl text-gray-800  leading-tight">
-                                List dari Semua Cicilan {{ $customer->name }}
+                                List dari Semua Cicilan {{ $customer?->name }}
                             </h2>
                         </div>
-                        {{-- <div class="flex items-center flex-1 space-x-4">
+                        <div class="flex items-center flex-1 space-x-4">
                             <h5>
                                 <span class="text-gray-500">Total Uang Yang Dipinjamkan</span>
-                                <span class="font-bold text-lg text-indigo-900">Rp {{ number_format($totalAmount, 0, ',', '.') }}</span>
+                                <span class="font-bold text-lg text-indigo-900">Rp {{ number_format($total, 0, ',', '.') }}</span>
                             </h5>
                             <h5>
-                                <span class="text-gray-500">Total Uang Dengan Bunga</span>
-                                <span class="font-bold text-lg text-indigo-900">Rp {{ number_format($totalAmountWithInterest, 0, ',', '.') }}</span>
+                                <span class="text-gray-500">Total Pinjaman</span>
+                                <span class="font-bold text-lg text-indigo-900">{{ $count }}</span>
                             </h5>
-                            <h5>
-                                <span class="text-gray-500">Proyeksi Keuntungan</span>
-                                <span class="font-bold text-lg text-indigo-900">Rp {{ number_format($profitProjection, 0, ',', '.') }}</span>
-                            </h5>
-                        </div> --}}
+                        </div>
                     </div>
                 </header>
                 <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
@@ -35,11 +31,16 @@
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input wire:model.debounce.500="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari pinjaman berdasarkan id peminjaman" required="">
+                                <input wire:model.debounce.500ms="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari pinjaman berdasarkan id peminjaman" required="">
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3">
+                        <select wire:model.debounce.500ms="filter_status" name="filter_status" id="filter_status" class="rounded-lg">
+                            <option disabled value="">Pilih Status</option>
+                            <option value="1">Lunas</option>
+                            <option value="0">Belum Lunas</option>
+                        </select>
                         <a href="{{ route('customers.new-loan', $customer->id) }}" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 focus:outline-none">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
@@ -64,7 +65,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($customer->loans as $loan)
+                            @forelse ($loans as $loan)
                             <tr class="border-b hover:bg-gray-100 ">
                                 <th scope="row" class="items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap ">
                                     <span class="text-sm text-gray-500 block">{{ $loan->id }}</span>
@@ -120,9 +121,9 @@
                 <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0" aria-label="Table navigation">
                     <span class="text-sm font-normal text-gray-500">
                         Menampilkan
-                        {{-- <span class="font-semibold text-gray-900">{{ $loans->firstItem() }}</span> --}}
+                        <span class="font-semibold text-gray-900">{{ $loans->firstItem() }}</span>
                         dari
-                        {{-- <span class="font-semibold text-gray-900">{{ $loans?->count() }}</span> --}}
+                        <span class="font-semibold text-gray-900">{{ $loans?->total() }}</span>
                     </span>
                     <button type="button" wire:click="loadMore()" class="text-sm font-normal text-indigo-600 ">
                         Muat Lebih ...

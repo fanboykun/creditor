@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Loan;
 use Livewire\Component;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Livewire\Redirector;
@@ -27,8 +28,8 @@ class AddLoan extends Component
         'selected_customer_info' => 'required|string|max:255',
         'amount' => 'required',
         'interest_rate' => 'required',
-        'start_date' => 'required',
-        'end_date' => 'required',
+        'start_date' => 'required|date_format:Y-m-d',
+        'end_date' => 'required|date_format:Y-m-d',
         'status' => 'required',
         'note' => 'nullable|string|max:255'
     ];
@@ -44,32 +45,43 @@ class AddLoan extends Component
 
     public function addNewLoan() : void
     {
+        $this->validate();
         $c_id = $this->customer_id;
-        if( !Customer::find($c_id)->exists()){
-            return;
-        };
-        if($this->checkIsHaveActiveLoan($c_id)){
+        try{
+            if( !Customer::find($c_id)->exists()){
+                return;
+            };
+            if($this->checkIsHaveActiveLoan($c_id)){
+                return;
+            }
+            $this->saveLoan($c_id);
+        }catch(Exception $e){
             return;
         }
-        $this->saveLoan($c_id);
     }
 
     private function saveLoan(int $c_id): Redirector|RedirectResponse {
-        $this->validate();
-        $loan = new Loan;
-        $loan->user_id = auth()->id();
-        $loan->customer_id = $c_id;
-        $loan->amount = $this->amount;
-        $loan->interest = $this->interest_rate;
-        $loan->total = $this->getTotal($this->amount, $this->interest_rate);
-        $loan->remaining = $this->getTotal($this->amount, $this->interest_rate);
-        $loan->status = $this->status;
-        $loan->start_date = $this->start_date;
-        $loan->end_date = $this->end_date;
-        $loan->note = $this->note;
-        $loan->save();
+        try {
+            DB::transaction(function () use($c_id) {
+                $loan = new Loan;
+                $loan->user_id = auth()->id();
+                $loan->customer_id = $c_id;
+                $loan->amount = $this->amount;
+                $loan->interest = $this->interest_rate;
+                $loan->total = $this->getTotal($this->amount, $this->interest_rate);
+                $loan->paid = 0;
+                $loan->remaining = $this->getTotal($this->amount, $this->interest_rate);
+                $loan->status = $this->status;
+                $loan->start_date = $this->start_date;
+                $loan->end_date = $this->end_date;
+                $loan->note = $this->note;
+                $loan->save();
+            });
+        } catch(Exception $e) {
+            return redirect()->route('loans.index')->with('error', 'Pinjaman gagal dibuat!');
+        }
 
-        return redirect()->route('loans.index');
+        return redirect()->route('loans.index')->with('success', 'Pinjaman berhasil dibuat!');
     }
 
     public function setCustomer(Customer $customer) : void
@@ -111,6 +123,6 @@ class AddLoan extends Component
         ->whereExists(function($q){
             $q->where('status', false);
         })->first();
-        return is_null($check);
+        return isset($check);
     }
 }

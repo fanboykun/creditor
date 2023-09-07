@@ -104,7 +104,7 @@
                             @enderror
                         </div>
                     </div>
-                    <x-primary-button class="mt-4">Add Customer</x-primary-button>
+                    <x-primary-button class="mt-4" wire:loading.attr="disabled" wire:loading.class="opacity-50" wire:target="addNewLoan">Add Customer</x-primary-button>
                 </form>
             </div>
         </div>

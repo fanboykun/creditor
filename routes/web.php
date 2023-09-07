@@ -46,7 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         if($loan){
             return redirect()->route('customers.pay-installment', ['customer' => $customer, 'loan' => $loan]);
         }
-        return back()->with('message', 'customer does not have any loan to pay');
+        return redirect()->route('customers.index')->with('warning', 'nasabah tidak memiliki pinjaman aktif');
     })->name('customers.active-installment');
 
     Route::get('/loans', IndexLoan::class)->name('loans.index');

@@ -19,8 +19,8 @@ class IndexCustomer extends Component
         ->with('loans', function($query) {
             $query->inactive();
         })
-        ->latest()->paginate($this->perPage);
-        // dd($customers->first());
+        ->latest()
+        ->paginate($this->perPage);
         return view('livewire.customer.index-customer', ['customers' => $customers]);
     }
 

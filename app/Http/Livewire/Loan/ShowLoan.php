@@ -11,7 +11,7 @@ class ShowLoan extends Component
 
     public function render()
     {
-        $this->loan->load('customer');
+        $this->loan->load('customer', 'installments');
         return view('livewire.loan.show-loan');
     }
 }

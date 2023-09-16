@@ -97,7 +97,7 @@
                             @enderror
                         </div>
                         <div class="w-full">
-                            <label for="address" class="block mb-2 text-sm font-medium text-gray-900">Catatan </label>
+                            <label for="note" class="block mb-2 text-sm font-medium text-gray-900">Catatan </label>
                             <textarea id="note" rows="5" wire:model.defer="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Masukan catatan jika ada"></textarea>
                             @error('note')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>

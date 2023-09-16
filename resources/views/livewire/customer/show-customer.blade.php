@@ -40,7 +40,7 @@
                         <x-secondary-button class="capitalize mx-2 drop-shadow-md hover:bg-slate-800 hover:text-white hover:drop-shadow-lg">
                             Edit Data
                         </x-secondary-button>
-                        <a href="{{ route('customers.create') }}" class="flex items-center mt-2 justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 sm:font-medium tracking-widest rounded-lg font-normal text-xs px-4 py-2.5 focus:outline-none">
+                        <a href="{{ route('customers.new-loan', $customer) }}" class="flex items-center mt-2 justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 sm:font-medium tracking-widest rounded-lg font-normal text-xs px-4 py-2.5 focus:outline-none">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"></path>
                             </svg>

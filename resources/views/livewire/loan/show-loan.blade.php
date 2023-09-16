@@ -3,7 +3,7 @@
         <div class="max-w-full mx-auto space-y-6 drop-shadow-lg">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="px-4 sm:px-0">
-                    <h3 class="mb-4 text-2xl font-bold text-gray-700">Detail Pinjaman Nasabah <span class="underline">{{ $loan?->customer->name }}</span></h3>
+                    <h3 class="mb-4 text-2xl font-bold text-gray-700">Detail Pinjaman Nasabah <a href="{{ route('customers.profile', $loan->customer) }}" class="underline">{{ $loan?->customer->name }}</a></h3>
                     <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Detail pinjaman nasabah</p>
                 </div>
                 <div class="mt-6 border-t border-gray-100">
@@ -17,8 +17,16 @@
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $loan?->id }}</dd>
                       </div>
                       <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                        <dt class="text-sm font-medium leading-6 text-gray-900">Jumlah Pinjaman (total)</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-900 sm:col-span-2 sm:mt-0 font-bold">Rp {{ number_format($loan?->total, 0, ',', '.') }}</dd>
+                        <dt class="text-sm font-medium leading-6 text-gray-900">Jumlah</dt>
+                        <dd class="mt-1 text-sm leading-6 text-gray-900 sm:col-span-2 sm:mt-0 font-bold">Rp {{ number_format($loan?->amount, 0, ',', '.') }}</dd>
+                      </div>
+                      <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt class="text-sm font-medium leading-6 text-gray-900">Bunga</dt>
+                        <dd class="mt-1 text-sm leading-6 text-gray-900 sm:col-span-2 sm:mt-0 font-bold">{{ $loan?->interest }}%</dd>
+                      </div>
+                      <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt class="text-sm font-medium leading-6 text-gray-900">Total Pinjaman</dt>
+                        <dd class="mt-1 text-sm leading-6 text-gray-900 sm:col-span-2 sm:mt-0 font-bold"> Rp {{ number_format($loan?->total, 0, ',', '.') }}</dd>
                       </div>
                       <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Terbayar</dt>
@@ -50,7 +58,13 @@
                       </div>
                     </dl>
                     <div class="block sm:flex sm:items-end sm:justify-end">
-                        <x-secondary-button class="capitalize mx-2 drop-shadow-md hover:bg-slate-800 hover:text-white hover:drop-shadow-lg">
+                        <x-danger-button class="capitalize mx-2 drop-shadow-md hover:drop-shadow-lg" x-on:click="$dispatch('open-modal', 'delete-loan')">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1.5 my-auto">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                            </svg>
+                           Hapus
+                        </x-danger-button>
+                        <x-secondary-button type="button" x-on:click="$dispatch('open-modal', 'edit-loan')">
                             Edit Data
                         </x-secondary-button>
                     </div>
@@ -152,6 +166,133 @@
             </div>
         </div>
     </section>
+
+    <x-modal name="edit-loan" x-data={} focusable>
+        <div class="px-6 py-6 lg:px-8" @close-modal.window="show = false">
+            <h3 class="mb-4 text-xl font-medium text-gray-900 underline">Detail Data Cicilan ({{ $loan->id }})</h3>
+            <form class="space-y-6" wire:submit.prevent="updateLoan()">
+                <div>
+                    <label for="loan_id" class="block mb-2 text-sm font-medium text-gray-900">Nasabah</label>
+                    <input type="text" value="{{ $loan->customer->name }}" disabled name="customer" id="customer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                </div>
+                <div class="grid grid-cols-4 gap-x-2">
+                    <div class=" col-span-3">
+                        <label for="amount" class="block mb-2 text-sm font-medium text-gray-900">Jumlah Pinjaman <span class="text-red-400 text-xs">*</span></label>
+                        <div class="relative mb-2">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                            <span class="text-sm text-gray-700">Rp</span>
+                            </div>
+                            <input type="number" id="amount" wire:model.defer="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" required>
+                        </div>
+                        @error('amount')
+                            <span class="text-red-400 text-sm block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="amount" class="block mb-2 text-sm font-medium text-gray-900">Bunga <span class="text-red-400 text-xs">*</span></label>
+                        <div class="relative mb-2">
+                            <input type="text" id="interest" wire:model.defer="interest" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5" required>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none">
+                                <span class="text-sm text-gray-700">%</span>
+                            </div>
+                        </div>
+                        @error('interest_rate')
+                            <span class="text-red-400 text-sm block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="w-full">
+                    <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Dimulai Cicilan <span class="text-red-400 text-xs">*</span></label>
+                    <input type="date" name="start_date" id="start_date" required wire:model.debounce="start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                    @error('start_date')
+                        <span class="text-red-400 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="w-full">
+                    <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Akhir Cicilan <span class="text-red-400 text-xs">*</span></label>
+                    <input type="date" name="end_date" id="end_date" wire:model.debounce="end_date" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                    @error('end_date')
+                        <span class="text-red-400 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="w-full">
+                    <label for="note" class="block mb-2 text-sm font-medium text-gray-900">Catatan </label>
+                    <textarea id="note" rows="5" wire:model.defer="note" class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Masukan catatan jika ada"></textarea>
+                    @error('note')
+                        <span class="text-red-400 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="flex justify-between">
+                    <x-secondary-button x-on:click="$dispatch('close')">Cancel</x-secondary-button>
+                    <x-primary-button>Save</x-primary-button>
+                </div>
+            </form>
+        </div>
+    </x-modal>
+
+    <x-modal name="delete-loan" x-data={} focusable>
+        <div @close-modal.window="show = false">
+            <form method="post" wire:submit.prevent="destroyLoan" class="p-6">
+
+                <h2 class="text-lg font-medium text-gray-900">
+                    {{ __('Apakah anda yakin ingin menghapus pinjaman ini?') }}
+                </h2>
+                @error('loan')
+                <h2 class="text-lg font-medium text-gray-900">
+                    {{ $message }}
+                </h2>
+                @enderror
+
+                <p class="mt-1 text-sm text-gray-600">
+                    {{ __('Ketika data ini dihapus, maka data yang telah dihapus tidak akan bisa dikembalikan?') }}
+                </p>
+                <div class="flex flex-col gap-y-2  py-2 px-6 border border-indigo-400 rounded-lg">
+                    <div class="flex justify-between py-1.5 bg-gray-50">
+                        <div class="items-end text-end">
+                            Nasabah :
+                        </div>
+                        <div class="items-end">
+                            ({{ $loan->customer_id }}) {{ $loan->customer->name }}
+                        </div>
+                    </div>
+                    <div class="flex justify-between py-1.5">
+                        <div class="items-end text-end">
+                            Jumlah Pinjaman :
+                        </div>
+                        <div class="items-end">
+                            Rp {{ number_format($loan->total, 0, ',', '.' ) }}
+                        </div>
+                    </div>
+                    <div class="flex justify-between py-1.5 bg-gray-50">
+                        <div class="items-end text-end">
+                            Sisa Pinjaman :
+                        </div>
+                        <div class="items-end">
+                            Rp {{ number_format($loan->remaining, 0, ',', '.' ) }}
+                        </div>
+                    </div>
+                    <div class="flex justify-between py-1.5">
+                        <div class="items-end text-end">
+                            Terbayar :
+                        </div>
+                        <div class="items-end">
+                            Rp {{ number_format($loan->paid, 0, ',', '.' ) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <x-secondary-button x-on:click="$dispatch('close')">
+                        {{ __('Cancel') }}
+                    </x-secondary-button>
+
+                    <x-danger-button class="ml-3">
+                        {{ __('Delete Installment') }}
+                    </x-danger-button>
+                </div>
+            </form>
+        </div>
+    </x-modal>
 
 </div>
 

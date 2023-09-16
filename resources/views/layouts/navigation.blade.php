@@ -11,52 +11,27 @@
 
 
             <div class="flex justify-between items-center w-full gap-4">
-                  {{-- <div class="sm:-mx-4 mx-4">
+                  <div class="sm:-mx-4 mx-4">
                       <nav aria-label="Breadcrumb" class="flex py-2">
-                          <ol
-                          role="list"
-                          class="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600"
-                          >
-                          <li class="flex items-center">
-                              <a
-                              href="#"
-                              class="flex h-10 items-center gap-1.5 bg-gray-100 px-4 transition hover:text-gray-900"
-                              >
-                              <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  class="h-4 w-4"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                              >
-                                  <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                                  />
-                              </svg>
-
-                              <span class="ms-1.5 text-xs font-medium"> Home </span>
-                              </a>
-                          </li>
-
-                          <li class="relative flex items-center">
-                              <span
-                              class="absolute inset-y-0 -start-px h-10 w-4 bg-gray-100 [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180"
-                              >
-                              </span>
-
-                              <a
-                              href="#"
-                              class="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium transition hover:text-gray-900"
-                              >
-                              Shirts
-                              </a>
-                          </li>
-                          </ol>
+                          @if(@isset($breadcrumbs))
+                          <ol role="list" class="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600">
+                            <li class="flex items-center">
+                                <button type="button" class="flex h-10 items-center gap-1.5 bg-gray-100 px-4 transition hover:text-gray-900">
+                                    <span class="ms-1.5 text-xs font-medium"> {{ $breadcrumbs }} </span>
+                                </button>
+                            </li>
+                                @if(isset($breadcrumbs_child))
+                                <li class="relative flex items-center">
+                                    <span class="absolute inset-y-0 -start-px h-10 w-4 bg-gray-100 [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180"></span>
+                                    <button type="button" class="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium transition hover:text-gray-900">
+                                        {{ $breadcrumbs_child }}
+                                    </button>
+                                </li>
+                                @endif
+                        </ol>
+                        @endif
                       </nav>
-                  </div> --}}
+                  </div>
               </div>
 
               <div class="fixed right-0 flex items-start justify-between gap-8">
@@ -66,7 +41,8 @@
                     <div class="flex items-center ml-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
-                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-100 bg-slate-800/80 hover:text-gray-50 hover:bg-slate-800 focus:outline-none transition ease-in-out duration-150">
+                                   <span class="font-semibold text-sm mx-2">{{ Auth::user()->name }}</span>
                                     <div>
                                         <svg
                                             class="h-4 w-4"

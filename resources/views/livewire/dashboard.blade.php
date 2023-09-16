@@ -1,4 +1,10 @@
 <div>
+    <x-slot name="breadcrumbs">
+        Home
+        <x-slot name="breadcrumbs_child">
+            Dashboard
+        </x-slot>
+    </x-slot>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="text-gray-900">
 

@@ -2,7 +2,7 @@
     <section class="bg-gray-100 py-2">
         <div class="w-full mx-auto space-y-6 drop-shadow-lg">
             <div class="pl-4 sm:pl-8 py-2 grid sm:grid-cols-4 bg-white">
-                <div class="col-span-3">
+                <div class="sm:col-span-3">
                     <h2 class="mb-4 text-2xl font-bold text-gray-700">Bayar Cicilan</h2>
                     <form wire:submit.prevent="addNewInstallment()">
                         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -30,8 +30,8 @@
                         <x-primary-button class="mt-4" wire:loading.attr="disabled" wire:loading.class="opacity-50" wire:target="addNewLoan">Simpan</x-primary-button>
                     </form>
                 </div>
-                <div class=" bg-white pl-2 ml-2 rounded-lg">
-                    <div class="mt-2 pr-2 mr-2">
+                <div class="border-t-2 bg-white mt-4 sm:mt-0 sm:border-none px-2 sm:pl-2 sm:ml-2 rounded-lg sm:max-h-[60vh] overflow-y-auto">
+                    <div class="sm:mt-2 sm:pr-2 sm:mr-2">
                         <h2 class="mb-4 text-2xl font-bold text-gray-700 text-center">Info Cicilan</h2>
                         <p class="flex justify-between mb-4 text-sm font-bold text-gray-700 text-start">Jumlah : <span class="text-end">Rp 1.000.000</span></p>
                         <p class="flex justify-between mb-4 text-sm font-bold text-gray-700 text-start">Sisa : <span class="text-end">Rp 400.000</span></p>
@@ -39,7 +39,7 @@
                         <p class="flex justify-between mb-4 text-sm font-bold text-gray-700 text-start">Cicilan : <span class="text-end">3x</span></p>
                         <div class="divide-y space-y-1 divide-blue-200">
                             <div class="py-2 bg-gray-100 rounded-xl px-1.5 text-gray-600">
-                                <span class="text-xs text-indigo-500 leading-5 bg-white w-fit px-1.5 rounded-full">{{ now()->format('d F, Y') }}</span>
+                                <span class="text-xs text-indigo-500 leading-5 w-fit px-1.5 rounded-full">{{ now()->format('d F, Y') }}</span>
                                 <span class="block px-1 leading-5 font-semibold">Rp 500.000</span>
                             </div>
                         </div>

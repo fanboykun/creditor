@@ -53,50 +53,29 @@
                 </div>
 
                 <!-- Content -->
-                <div class="overflow-x-auto max-h-96">
+                <div class="overflow-x-auto min-h-40 max-h-96">
                     <table class="w-full table-auto text-sm text-left text-gray-500">
                         <thead class="w-full text-xs text-gray-700 uppercase bg-gray-50 sticky top-0 whitespace-pre-line z-10">
                             <tr class="bg-gray-50">
-                                <th scope="col" class="w-6"></th>
                                 <th scope="col" class="px-4 py-3">Nama Nasabah</th>
                                 <th scope="col" class="px-4 py-3 text-right">Jumlah Pembayaran Cicilan</th>
                                 <th scope="col" class="px-4 py-3 text-center">Tanggal Dibayar</th>
+                                <th scope="col" class="px-4 py-3 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="min-w-full">
                         @forelse ($installments as $installment_dates => $installment_data)
                             <tr>
-                                <td colspan="5" class="bg-slate-800 shadow-md text-white text-md px-2 py-2 font-bold sticky top-10 sm:mt-15 sm:top-15 mt-12 rounded-lg z-10">
-                                    <span class="flex ml-4 items-center justify-center"> {{ Carbon\Carbon::createFromDate($installment_dates)->format('d F Y') }} </span>
+                                <td colspan="5" class="bg-slate-800 shadow-md text-white text-md ">
+                                    <span class="flex ml-4 items-center justify-center"> {{ Carbon\Carbon::createFromDate($installment_dates)->format('d F Y') }}
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="ml-2 my-auto w-5 h-5">
+                                            <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v13.19l5.47-5.47a.75.75 0 111.06 1.06l-6.75 6.75a.75.75 0 01-1.06 0l-6.75-6.75a.75.75 0 111.06-1.06l5.47 5.47V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
                                 </td>
                             </tr>
                                 @forelse ($installment_data as $installment)
                                     <tr class="border-b hover:bg-gray-100 items-center even:bg-slate-50">
-                                        <td>
-                                            <x-dropdown align="left" width="48">
-                                                <x-slot name="trigger">
-                                                    <button id="dropdownButton" data-dropdown-toggle="dropdown" class="p-1 bg-white shadow-lg text-slate-800 rounded-lg focus:bg-slate-800 focus:text-white active:bg-slate-800 active:text-white" type="button">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                                                        </svg>
-                                                    </button>
-                                                </x-slot>
-                                                <x-slot name="content" class="shadow-xl bg-indigo-400">
-                                                    <button class="border-b border-gray-600 block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
-                                                        Edit Data
-                                                    </button>
-                                                    <button class="border-b border-gray-600 block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
-                                                        Hapus Data
-                                                    </button>
-                                                    <x-dropdown-link :href="route('profile.edit')" class="border-b border-gray-600">
-                                                        {{ __('Detail Pinjaman') }}
-                                                    </x-dropdown-link>
-                                                    <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Profile Nasabah') }}
-                                                    </x-dropdown-link>
-                                                </x-slot>
-                                            </x-dropdown>
-                                        </td>
                                         <td class="px-4 py-2 font-medium text-gray-900 break-words">
                                             {{ $installment->loan->customer->name }}
                                             <span class="text-sm text-gray-400 ml-1 block">ID Nasabah : {{ $installment->loan->customer->id }}</span>
@@ -108,8 +87,11 @@
                                             {{ $installment->created_at->format('H:i-l, d/F/Y') }}
                                             <span class="text-sm text-gray-400 ml-1 block">Oleh : {{ $installment->user->name }}</span>
                                         </td>
+                                        <td class="justify-center text-center">
+                                            <a href="#" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</a>
+                                        </td>
                                     </tr>
-                                @empty
+                                    @empty
                                 <tr>
                                     <td colspan="9" class="px-4 py-2 text-center">No Data Found</td>
                                 </tr>

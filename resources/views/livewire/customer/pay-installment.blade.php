@@ -38,15 +38,13 @@
                         <p class="flex justify-between mb-4 text-sm font-bold text-gray-700 text-start">Sisa : <span class="text-end">Rp {{ number_format($loan->remaining, 0, ',', '.') }}</span></p>
                         <p class="flex justify-between mb-4 text-sm font-bold text-gray-700 text-start">Terbayar : <span class="text-end">Rp {{ number_format($loan->paid, 0, ',', '.') }}</span></p>
                         <p class="flex justify-between mb-4 text-sm font-bold text-gray-700 text-start">Cicilan : <span class="text-end">{{ $loan->installments?->count() }}x</span></p>
-                        @forelse ($loan->installments as $installment)
                         <div class="divide-y space-y-1 divide-blue-200">
+                            @forelse ($loan->installments->sortByDesc('created_at') as $installment)
                             <div class="py-2 bg-gray-100 rounded-xl px-1.5 text-gray-600">
-                                <span class="text-xs text-indigo-500 leading-5 w-fit px-1.5 rounded-full">{{ now()->format('d F, Y') }}</span>
-                                <span class="block px-1 leading-5 font-semibold">Rp 500.000</span>
+                                <span class="text-xs text-indigo-500 leading-5 w-fit px-1.5 rounded-full">{{ $installment->created_at->format('d F, Y') }}</span>
+                                <span class="block px-1 leading-5 font-semibold">Rp {{ number_format($installment->amount, 0, ',', '.') }}</span>
                             </div>
-                        </div>
-                        @empty
-                        <div class="divide-y space-y-1 divide-blue-200">
+                            @empty
                             <div class="py-2 bg-gray-100 rounded-xl px-1.5 text-red-600/80 text-center">
                                 <span class="block px-1 leading-5 font-semibold">Belum Ada Cicilan !</span>
                             </div>

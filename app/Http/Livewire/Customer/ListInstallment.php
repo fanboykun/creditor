@@ -11,7 +11,7 @@ class ListInstallment extends Component
 
     public function render()
     {
-        $this->customer->load('loans.installments');
+        $this->customer->load('loans.installments')->groupBy('loans.id');
         return view('livewire.customer.list-installment');
     }
 }

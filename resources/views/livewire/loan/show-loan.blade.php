@@ -18,15 +18,15 @@
                       </div>
                       <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Jumlah Pinjaman (total)</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $loan?->total }}</dd>
+                        <dd class="mt-1 text-sm leading-6 text-gray-900 sm:col-span-2 sm:mt-0 font-bold">Rp {{ number_format($loan?->total, 0, ',', '.') }}</dd>
                       </div>
                       <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Terbayar</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $loan?->paid }}</dd>
+                        <dd class="mt-1 text-sm leading-6 text-green-700 sm:col-span-2 sm:mt-0 font-semibold">Rp {{ number_format($loan?->paid, 0, ',', '.') }}</dd>
                     </div>
                     <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Sisa</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $loan?->remaining }}</dd>
+                        <dd class="mt-1 text-sm leading-6 text-red-400 font-bold sm:col-span-2 sm:mt-0">Rp {{ number_format($loan?->remaining, 0, ',', '.') }}</dd>
                     </div>
                     <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Status</dt>
@@ -82,7 +82,7 @@
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input wire:model.debounce.500="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari cicilan berdasarkan id" required="">
+                                <input wire:model.debounce.500ms="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari cicilan berdasarkan id" required="">
                             </div>
                         </div>
                     </div>
@@ -101,6 +101,7 @@
                     <table class="w-full table-auto text-sm text-left text-gray-500">
                         <thead class="w-full text-xs text-gray-700 uppercase bg-gray-50 sticky top-0 whitespace-pre-line z-10">
                             <tr class="bg-gray-50">
+                                <th scope="col" class="px-4 py-3">ID Cicilan</th>
                                 <th scope="col" class="px-4 py-3">Nama Nasabah</th>
                                 <th scope="col" class="px-4 py-3 text-right">Jumlah Pembayaran Cicilan</th>
                                 <th scope="col" class="px-4 py-3 text-center">Tanggal Dibayar</th>
@@ -108,8 +109,11 @@
                             </tr>
                         </thead>
                         <tbody class="min-w-full">
-                            @forelse ($loan->installments as $installment)
+                            @forelse ($installments as $installment)
                                 <tr class="border-b hover:bg-gray-100 items-center even:bg-slate-50">
+                                    <td class="px-4 py-2 font-medium text-gray-900 text-left items-center ">
+                                        {{ $installment->id }}
+                                    </td>
                                     <td class="px-4 py-2 font-medium text-gray-900 break-words">
                                         {{ $installment->loan->customer->name }}
                                         <span class="text-sm text-gray-400 ml-1 block">ID Nasabah : {{ $installment->loan->customer->id }}</span>
@@ -141,9 +145,9 @@
                         dari
                         <span class="font-semibold text-gray-900 ">{{ $loan?->installments->count() }}</span>
                     </span>
-                    <button type="button" wire:click="loadMore()" class="text-sm font-normal text-indigo-600 ">
+                    {{-- <button type="button" wire:click="loadMore()" class="text-sm font-normal text-indigo-600 ">
                         Muat Lebih ...
-                    </button>
+                    </button> --}}
                 </nav>
             </div>
         </div>

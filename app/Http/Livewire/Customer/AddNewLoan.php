@@ -15,7 +15,6 @@ class AddNewLoan extends Component
 {
     public Customer $customer;
 
-    public $customer_id = null;
     public string $selected_customer_info;
     public int $amount;
     public float $interest_rate;
@@ -27,6 +26,7 @@ class AddNewLoan extends Component
     public int $duration;
 
     protected $rules = [
+        'customer.id' => 'required|integer',
         'selected_customer_info' => 'required|string|max:255',
         'amount' => 'required|numeric',
         'interest_rate' => 'required|numeric',
@@ -47,15 +47,13 @@ class AddNewLoan extends Component
         $this->validate();
         $c_id = $this->customer->id;
         try{
-            if( Customer::find($c_id) == null){
-                return;
-            };
             if($this->checkIsHaveActiveLoan($c_id)){
+                dd('cannot');
                 return;
             }
             $this->saveLoan($c_id);
         }catch(Exception $e){
-            return;
+            throw($e);
         }
     }
 
@@ -81,12 +79,6 @@ class AddNewLoan extends Component
         }
 
         return redirect()->route('loans.index')->with('success', 'Pinjaman berhasil dibuat!');
-    }
-
-    public function setCustomer(Customer $customer) : void
-    {
-        $this->customer_id = $customer->id;
-        $this->selected_customer_info = '(' .$customer->id .')'. ' ' . $customer->name . ' - ' . $customer->card_number;
     }
 
     public function updatedIsTodaySelected() : void
@@ -117,11 +109,9 @@ class AddNewLoan extends Component
 
     private function checkIsHaveActiveLoan(int $c_id) : bool
     {
-        $check = DB::table('loans')
-        ->where('customer_id', $c_id)
-        ->whereExists(function($q){
-            $q->where('status', false);
-        })->first();
-        return isset($check);
+        $check = Loan::where('customer_id', $c_id)
+        ->where('status', false)
+        ->first();
+        return $check != null;
     }
 }

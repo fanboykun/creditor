@@ -26,11 +26,11 @@ class AddLoan extends Component
 
     protected $rules = [
         'selected_customer_info' => 'required|string|max:255',
-        'amount' => 'required',
-        'interest_rate' => 'required',
+        'amount' => 'required|numeric',
+        'interest_rate' => 'required|numeric',
         'start_date' => 'required|date_format:Y-m-d',
-        'end_date' => 'required|date_format:Y-m-d',
-        'status' => 'required',
+        'end_date' => 'required|date_format:Y-m-d|after:start_date',
+        'status' => 'required|boolean',
         'note' => 'nullable|string|max:255'
     ];
 

@@ -189,29 +189,39 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="amount" class="block mb-2 text-sm font-medium text-gray-900">Bunga <span class="text-red-400 text-xs">*</span></label>
+                        <label for="interest" class="block mb-2 text-sm font-medium text-gray-900">Bunga <span class="text-red-400 text-xs">*</span></label>
                         <div class="relative mb-2">
-                            <input type="text" id="interest" wire:model.defer="interest" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5" required>
+                            <input type="number" step="any" id="interest" wire:model.defer="interest" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5" required>
                             <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none">
                                 <span class="text-sm text-gray-700">%</span>
                             </div>
                         </div>
-                        @error('interest_rate')
+                        @error('interest')
                             <span class="text-red-400 text-sm block">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
                 <div class="w-full">
-                    <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Dimulai Cicilan <span class="text-red-400 text-xs">*</span></label>
+                    <label for="start_date" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Dimulai Cicilan <span class="text-red-400 text-xs">*</span></label>
                     <input type="date" name="start_date" id="start_date" required wire:model.debounce="start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
                     @error('start_date')
                         <span class="text-red-400 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="w-full">
-                    <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Akhir Cicilan <span class="text-red-400 text-xs">*</span></label>
+                    <label for="end_date" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Akhir Cicilan <span class="text-red-400 text-xs">*</span></label>
                     <input type="date" name="end_date" id="end_date" wire:model.debounce="end_date" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
                     @error('end_date')
+                        <span class="text-red-400 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="w-full">
+                    <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Status <span class="text-red-400 text-xs">*</span></label>
+                    <select name="status" id="status" wire:model="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <option value="false" {{ $status == $loan->status ? 'selected' : '' }}>Berjalan</option>
+                        <option value="true" {{ $status == $loan->status ? 'selected' : '' }}>Selesai</option>
+                    </select>
+                    @error('status')
                         <span class="text-red-400 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
@@ -224,7 +234,7 @@
                 </div>
                 <div class="flex justify-between">
                     <x-secondary-button x-on:click="$dispatch('close')">Cancel</x-secondary-button>
-                    <x-primary-button>Save</x-primary-button>
+                    <x-primary-button class="capitalize">Update</x-primary-button>
                 </div>
             </form>
         </div>

@@ -41,7 +41,7 @@
                         <a href="{{ route('customers.list-loan', $customer) }}" class="hover:bg-slate-800 hover:text-white hover:drop-shadow-lg drop-shadow-md inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 capitalize tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
                             Semua Pinjaman
                         </a>
-                        <a href="{{ route('customers.list-loan', $customer) }}" class="hover:bg-slate-800 hover:text-white hover:drop-shadow-lg drop-shadow-md inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 capitalize tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                        <a href="{{ route('customers.list-installment', $customer) }}" class="hover:bg-slate-800 hover:text-white hover:drop-shadow-lg drop-shadow-md inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 capitalize tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
                             Semua Cicilan
                         </a>
                         <x-secondary-button x-on:click="$dispatch('open-modal', 'edit-customer')">

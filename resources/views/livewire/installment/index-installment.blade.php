@@ -38,7 +38,7 @@
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input wire:model.debounce.500="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari cicilan berdasarkan id" required="">
+                                <input wire:model.debounce.500="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari cicilan berdasarkan id pinjaman" required="">
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                                     <tr class="border-b hover:bg-gray-100 items-center even:bg-slate-50">
                                         <td class="px-4 py-2 font-medium text-gray-900 break-words">
                                             {{ $installment->loan->customer->name }}
-                                            <span class="text-sm text-gray-400 ml-1 block">ID Nasabah : {{ $installment->loan->customer->id }}</span>
+                                            <span class="text-sm text-gray-400 ml-1 block">ID Pinjaman : {{ $installment->loan_id }}</span>
                                         </td>
                                         <td class="px-4 py-2 font-medium text-gray-900 text-right items-center break-words">
                                         Rp {{ number_format($installment->amount, 0, ',', '.' ) }}
@@ -105,17 +105,6 @@
                     </table>
                 </div>
                 <!-- Pagination -->
-                <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0" aria-label="Table navigation">
-                    <span class="text-sm font-normal text-gray-500 ">
-                        Menampilkan
-                        <span class="font-semibold text-gray-900 ">{{ count($installments) }}</span>
-                        dari
-                        <span class="font-semibold text-gray-900 ">{{ $installments->count() }}</span>
-                    </span>
-                    <button type="button" wire:click="loadMore()" class="text-sm font-normal text-indigo-600 ">
-                        Muat Lebih ...
-                    </button>
-                </nav>
             </div>
         </div>
     </section>

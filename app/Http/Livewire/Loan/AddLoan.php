@@ -47,8 +47,9 @@ class AddLoan extends Component
     {
         $this->validate();
         $c_id = $this->customer_id;
+        dd(Customer::find($c_id));
         try{
-            if( !Customer::find($c_id)->exists()){
+            if( Customer::find($c_id) == null){
                 return;
             };
             if($this->checkIsHaveActiveLoan($c_id)){

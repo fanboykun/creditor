@@ -45,9 +45,9 @@ class AddNewLoan extends Component
     public function addNewLoan() : void
     {
         $this->validate();
-        $c_id = $this->customer_id;
+        $c_id = $this->customer->id;
         try{
-            if( !Customer::find($c_id)->exists()){
+            if( Customer::find($c_id) == null){
                 return;
             };
             if($this->checkIsHaveActiveLoan($c_id)){

@@ -4,7 +4,11 @@ namespace App\Http\Livewire\Customer;
 
 use Livewire\Component;
 use App\Models\Customer;
+use App\Models\Installment;
+use App\Models\Loan;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
+use Psy\VersionUpdater\Installer;
 
 class ShowCustomer extends Component
 {
@@ -61,7 +65,19 @@ class ShowCustomer extends Component
 
     public function destroyCustomer()
     {
+        try{
+            DB::transaction(function(){
+                Installment::whereHas('loan', function($q){
+                    $q->where('customer_id', $this->customer->id);
+                })->delete();
+                Loan::where('customer_id', $this->customer->id)->delete();
+                Customer::where('id',$this->customer->id)->delete();
+            });
+        }catch(\Exception $e){
+            throw($e);
+        }
         $this->dispatchBrowserEvent('close-modal');
+        return redirect()->route('customers.index')->with('success', 'Customer Deleted!');
     }
 
     private function resetInputField()

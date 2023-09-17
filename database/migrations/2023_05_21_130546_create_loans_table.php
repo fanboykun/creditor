@@ -17,7 +17,7 @@ return new class extends Migration
                 $table->engine = 'InnoDB';
                 $table->id();
                 $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-                $table->foreignId('customer_id')->nullable()->constrained('customers')->nullOnDelete();
+                $table->foreignId('customer_id')->nullable()->constrained('customers')->cascadeOnDelete();
                 $table->double('amount')->required();
                 $table->double('interest')->nullable();
                 $table->double('total')->nullable();

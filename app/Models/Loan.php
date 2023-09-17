@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Loan extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    
     public $defaultInterest = 3;
     protected $fillable = ['user_id', 'customer_id', 'amount', 'interest', 'total', 'paid', 'remaining', 'status', 'start_date', 'end_date', 'note'];
     protected $casts = [

@@ -13,7 +13,7 @@ class IndexInstallment extends Component
     public $perPage = 10;
     protected $queryString = ['s' => ['except' => '']];
 
-    public $listeners = ['installments-updated' => 'render'];
+    public $listeners = ['installments-updated' => 'render', 'installment-deleted' => 'render'];
 
     public function render() : \Illuminate\View\View
     {

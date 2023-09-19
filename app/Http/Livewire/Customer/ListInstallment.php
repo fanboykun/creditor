@@ -12,7 +12,7 @@ class ListInstallment extends Component
     public $s;
     // public $selected_installment;
 
-    public $listeners = ['installments-updated' => 'render'];
+    public $listeners = ['installments-updated' => 'render', 'installment-deleted' => 'render'];
 
     public function render()
     {

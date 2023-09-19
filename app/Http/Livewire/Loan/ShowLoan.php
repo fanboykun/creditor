@@ -25,7 +25,7 @@ class ShowLoan extends Component
     public float $amount;
     public $interest;
 
-    protected $listeners = ['loan-updated' => '$refresh'];
+    protected $listeners = ['loan-updated' => 'render', 'installment-deleted' => 'render'];
 
     public function mount(Loan $loan)
     {

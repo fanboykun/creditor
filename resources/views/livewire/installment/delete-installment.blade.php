@@ -16,7 +16,7 @@
                         Nasabah :
                     </div>
                     <div class="items-end">
-                        {{ $selected_installment['loan']['customer']['name'] }}
+                        {{ $selected_installment->loan->customer->name }}
                     </div>
                 </div>
                 <div class="flex justify-between py-1.5">
@@ -24,7 +24,7 @@
                         Jumlah Pinjaman :
                     </div>
                     <div class="items-end">
-                        Rp {{ number_format($selected_installment['loan']['total'], 0, ',', '.' ) }}
+                        Rp {{ number_format($selected_installment->loan->total, 0, ',', '.' ) }}
                     </div>
                 </div>
                 <div class="flex justify-between py-1.5 bg-gray-50">
@@ -32,7 +32,7 @@
                         Sisa Pinjaman :
                     </div>
                     <div class="items-end">
-                        Rp {{ number_format($selected_installment['loan']['remaining'], 0, ',', '.' ) }}
+                        Rp {{ number_format($selected_installment->loan->remaining, 0, ',', '.' ) }}
                     </div>
                 </div>
                 <div class="flex justify-between py-1.5">
@@ -40,7 +40,7 @@
                         Terbayar :
                     </div>
                     <div class="items-end">
-                        Rp {{ number_format($selected_installment['loan']['paid'], 0, ',', '.' ) }}
+                        Rp {{ number_format($selected_installment->loanpaid, 0, ',', '.' ) }}
                     </div>
                 </div>
             </div>

@@ -140,7 +140,7 @@
                                         <span class="text-sm text-gray-400 ml-1 block">Oleh : {{ $installment->user->name }}</span>
                                     </td>
                                     <td class="justify-center text-center">
-                                        <button type="button" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</button>
+                                        <button type="button" wire:click="$emitTo('installment.show-installment', 'show-installment-modal', {installment: {{ $installment }}})" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</button>
                                     </td>
                                 </tr>
                             @empty
@@ -159,9 +159,6 @@
                         dari
                         <span class="font-semibold text-gray-900 ">{{ $loan?->installments->count() }}</span>
                     </span>
-                    {{-- <button type="button" wire:click="loadMore()" class="text-sm font-normal text-indigo-600 ">
-                        Muat Lebih ...
-                    </button> --}}
                 </nav>
             </div>
         </div>
@@ -302,6 +299,14 @@
                 </div>
             </form>
         </div>
+    </x-modal>
+
+    <x-modal name="show-installment" x-data={} focusable>
+        @livewire('installment.show-installment')
+    </x-modal>
+
+    <x-modal name="delete-installment" x-data={} focusable>
+        @livewire('installment.delete-installment')
     </x-modal>
 
 </div>

@@ -48,8 +48,8 @@
                             <div class="py-2 bg-gray-100 rounded-xl px-1.5 text-red-600/80 text-center">
                                 <span class="block px-1 leading-5 font-semibold">Belum Ada Cicilan !</span>
                             </div>
+                            @endforelse
                         </div>
-                        @endforelse
                     </div>
                 </div>
             </div>

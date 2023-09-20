@@ -10,6 +10,13 @@ class SearchCustomerModal extends Component
     public int $perPage = 10;
     public string $search = '';
 
+    public bool $status =  false;
+
+    public function mount(bool $status = false)
+    {
+        $this->status = $status;
+    }
+
     public function render()
     {
         $customers = Customer::where(function($query){
@@ -18,7 +25,7 @@ class SearchCustomerModal extends Component
                 ->orWhere('card_number', 'like', '%'.$this->search.'%');
         })
         ->whereDoesntHave('loans', function($q){
-            $q->where('status', false);
+            $q->where('status', $this->status);
         })
         ->paginate($this->perPage);
         return view('livewire.loan.search-customer-modal', compact('customers'));

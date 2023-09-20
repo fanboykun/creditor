@@ -9,8 +9,23 @@
         <div class="text-gray-900">
 
             <div class="container items-center">
+                <header class="bg-white shadow text-gray-50 px-2 py-2">
+                    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-12 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl">
+                        <div class="grid grid-cols-2 gap-x-4">
+                            <h2 class="flex justify-end text-end items-center font-semibold text-xl  leading-tight">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z" />
+                                </svg>
+                                <span class="text-sm sm:text-lg"> Proyeksi Keuntungan </span>
+                            </h2>
+                            <h2 class="flex justify-start items-center font-semibold text-xl leading-tight">
+                                <span class="text-sm sm:text-lg">Rp {{ number_format($profit, 0, ',', '.') }}</span>
+                            </h2>
+                        </div>
+                    </div>
+                </header>
                 <div class="flex flex-wrap pb-3 mx-2 lg:mx-0">
-                  <div class="w-full p-2 lg:w-1/4 md:w-1/2">
+                  <div class="w-full p-2 lg:w-1/2 md:w-1/2">
                     <div class="flex flex-col px-6 py-10 overflow-hidden text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
                       <div class="flex flex-row justify-between items-center">
                         <div class="px-4 py-4 bg-gray-50  rounded-xl bg-opacity-30">
@@ -33,7 +48,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="w-full p-2 lg:w-1/4 md:w-1/2">
+                  <div class="w-full p-2 lg:w-1/2 md:w-1/2">
                     <div class="flex flex-col px-6 py-10 overflow-auto text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
                       <div class="flex flex-row justify-between items-center">
                         <div class="px-4 py-4 bg-gray-50  rounded-xl bg-opacity-30">
@@ -56,7 +71,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="w-full p-2 lg:w-1/4 md:w-1/2">
+                  <div class="w-full p-2 lg:w-1/2 md:w-1/2">
                     <div class="flex flex-col px-6 py-10 overflow-hidden text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
                       <div class="flex flex-row justify-between items-center">
                         <div class="px-4 py-4 bg-gray-50  rounded-xl bg-opacity-30">
@@ -79,7 +94,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="w-full p-2 lg:w-1/4 md:w-1/2">
+                  <div class="w-full p-2 lg:w-1/2 md:w-1/2">
                     <div class="flex flex-col px-6 py-10 overflow-auto text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
                       <div class="flex flex-row justify-between items-center">
                         <div class="px-4 py-4 bg-gray-50  rounded-xl bg-opacity-30">

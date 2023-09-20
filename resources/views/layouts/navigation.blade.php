@@ -42,7 +42,7 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-100 bg-slate-800/80 hover:text-gray-50 hover:bg-slate-800 focus:outline-none transition ease-in-out duration-150">
-                                   <span class="font-semibold text-sm mx-2">{{ Auth::user()->name }}</span>
+                                   <span class="font-semibold text-sm sm:mx-2 hidden sm:flex">{{ Auth::user()->name }}</span>
                                     <div>
                                         <svg
                                             class="h-4 w-4"

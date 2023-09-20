@@ -12,6 +12,7 @@ class Dashboard extends Component
     public $loans_total;
     public $paid_installments;
     public $remaining_installments;
+    public $profit;
 
     public function mount()
     {
@@ -19,6 +20,8 @@ class Dashboard extends Component
         $this->loans_total = Loan::sum('amount');
         $this->paid_installments = Loan::sum('paid');
         $this->remaining_installments = Loan::sum('remaining');
+        $total = Loan::sum('total');
+        $this->profit = $total - $this->loans_total;
     }
 
     public function render()

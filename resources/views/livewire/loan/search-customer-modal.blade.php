@@ -1,7 +1,7 @@
 <div>
     <div class="flex items-center justify-between border-b-2">
         <h1 class="flex items-center p-2 font-bold">Pilih Nasabah</h1>
-        <button type="button" class="flex items-start justify-end p-1.5 mr-1 rounded-lg  text-red-500 border border-red-400 hover:bg-red-500 hover:text-white" x-on:click="$dispatch('close')">
+        <button type="button" class="flex items-start justify-end p-1.5 mr-1 rounded-lg  text-red-400 hover:bg-red-500 hover:text-white" x-on:click="$dispatch('close')">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>

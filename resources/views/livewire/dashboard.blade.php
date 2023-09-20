@@ -14,22 +14,9 @@
                     <div class="flex flex-col px-6 py-10 overflow-hidden text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
                       <div class="flex flex-row justify-between items-center">
                         <div class="px-4 py-4 bg-gray-50  rounded-xl bg-opacity-30">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                              d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd" />
-                            <path fill-rule="evenodd"
-                              d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd" />
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="h-6 w-6 bi bi-people-fill" viewBox="0 0 16 16">
+                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
                           </svg>
-                        </div>
-                        <div class="inline-flex text-sm text-gray-50  sm:text-base">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-600/90 "
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          12%
                         </div>
                       </div>
                       <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50">{{ $customers_count }} <span class="text-sm">Orang Nasabah</span></h1>
@@ -50,22 +37,9 @@
                     <div class="flex flex-col px-6 py-10 overflow-auto text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
                       <div class="flex flex-row justify-between items-center">
                         <div class="px-4 py-4 bg-gray-50  rounded-xl bg-opacity-30">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                              d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd" />
-                            <path fill-rule="evenodd"
-                              d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd" />
-                          </svg>
-                        </div>
-                        <div class="inline-flex text-sm text-gray-50  sm:text-base">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-600/90 "
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          12%
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                            </svg>
                         </div>
                       </div>
                       <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50"><span class="text-sm"> Rp </span> {{ number_format($loans_total, 0, ',', '.' ) }}</h1>
@@ -86,22 +60,9 @@
                     <div class="flex flex-col px-6 py-10 overflow-hidden text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
                       <div class="flex flex-row justify-between items-center">
                         <div class="px-4 py-4 bg-gray-50  rounded-xl bg-opacity-30">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                              d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd" />
-                            <path fill-rule="evenodd"
-                              d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd" />
-                          </svg>
-                        </div>
-                        <div class="inline-flex text-sm text-gray-50  sm:text-base">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-600/90 "
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          12%
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0h11.25m-11.25 0V8.25" />
+                            </svg>
                         </div>
                       </div>
                       <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50"><span class="text-sm"> Rp </span>{{ number_format($paid_installments, 0, ',', '.' ) }}</h1>
@@ -122,22 +83,9 @@
                     <div class="flex flex-col px-6 py-10 overflow-auto text-gray-50 bg-gradient-to-br from-purple-400 via-blue-400 to-blue-500 rounded-xl shadow-lg duration-300 hover:shadow-2xl group">
                       <div class="flex flex-row justify-between items-center">
                         <div class="px-4 py-4 bg-gray-50  rounded-xl bg-opacity-30">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                              d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd" />
-                            <path fill-rule="evenodd"
-                              d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd" />
-                          </svg>
-                        </div>
-                        <div class="inline-flex text-sm text-gray-50  sm:text-base">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-600/90 "
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          12%
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg>
                         </div>
                       </div>
                       <h1 class="text-3xl font-bold text-gray-50 mt-8 group-hover:text-gray-50"><span class="text-sm"> Rp </span> {{ number_format($remaining_installments, 0, ',', '.' ) }}</h1>

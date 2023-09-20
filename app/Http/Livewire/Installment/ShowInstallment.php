@@ -37,7 +37,7 @@ class ShowInstallment extends Component
         $installment = Installment::findOrFail($this->selected_installment->id);
         [$paid, $remaining] = $this->findUpdatedPaidAndRemaining($loan, $this->amount, $installment);
         $this->validate([
-            'amount' => 'numeric|required|min:100000|max:'.$loan->remaining.''
+            'amount' => 'numeric|required|min:100000|max:'.$remaining.''
         ], [
             'amount.required' => 'The amount field is required',
             'amount.numeric' => 'The amount field must the amount of money to pay',

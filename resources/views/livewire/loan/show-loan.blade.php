@@ -212,17 +212,20 @@
                         <span class="text-red-400 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="w-full">
+                <div class="w-full" >
                     <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Status <span class="text-red-400 text-xs">*</span></label>
                     <select name="status" id="status" wire:model="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
-                        @if($status == false)
-                        {{-- <option value="1" selected>Selesai</option> --}}
-                        <option value="0" >Berjalan</option>
+                        @if($status == true)
+                        <option value="1" {{ $loan->status == true ? 'selected' : '' }}>Selesai</option>
+                        <option value="0" {{ $loan->status == false ? 'selected' : '' }}>Berjalan</option>
+                        @else
+                        <option value="0" {{ $loan->status == false ? 'selected' : '' }}>Berjalan</option>
+                        <option value="1" {{ $loan->status == true ? 'selected' : '' }}>Selesai</option>
                         @endif
-                        <option value="1" selected>Selesai</option>
                     </select>
+                    <span class="text-red-400 text-xs">{{ $setStatusMsg != '' ? $setStatusMsg : '' }}</span>
                     @error('status')
-                        <span class="text-red-400 text-xs">{{ $message }}</span>
+                        <span class="text-red-400 text-xs block">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="w-full">

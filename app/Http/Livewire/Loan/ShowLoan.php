@@ -23,7 +23,7 @@ class ShowLoan extends Component
     public float $amount;
     public $interest;
 
-    public $set_status;
+    public $setStatusMsg;
 
     protected $listeners = ['loan-updated' => 'render', 'installment-deleted' => 'render'];
 
@@ -60,8 +60,19 @@ class ShowLoan extends Component
             'note' => 'nullable|string',
         ]);
         [$total, $updated_remaining] = $this->recalculateLoan();
+        (bool) $updated_status = $this->status;
+        if($total == $this->loan->total){
+            if($this->status != $this->loan->status){
+                $this->setStatusMsg = 'tidak bisa mengganti status untuk pinjaman yang belum sepenuhnya terbayar atau sudah terbayar';
+                return;
+            }else{
+                $updated_status = $this->loan->status;
+            }
+        }else{
+            $updated_status = false;
+        }
         try{
-            DB::transaction(function() use ($total, $updated_remaining){
+            DB::transaction(function() use ($total, $updated_remaining, $updated_status){
                 Loan::where('id', $this->loan->id)->update([
                     'amount' => (float) $this->amount,
                     'total' => (float) $total,
@@ -69,7 +80,7 @@ class ShowLoan extends Component
                     'interest' => $this->interest,
                     'start_date' => $this->start_date,
                     'end_date' => $this->end_date,
-                    'status' => $this->status,
+                    'status' => $updated_status,
                     'note' => $this->note,
                 ]);
             });
@@ -110,9 +121,4 @@ class ShowLoan extends Component
         return redirect()->route('loans.index')->with('success', 'Loan Deleted Successfully!');
     }
 
-    public function updatedStatus()
-    {
-        // dd(0 == false);
-        // dd($this->status);
-    }
 }

@@ -50,8 +50,8 @@ class ShowInstallment extends Component
                 'amount' => $this->amount
                ]);
                 Loan::where('id', $loan->id)->update([
-                    'paid' => $paid,
-                    'remaining' => $remaining,
+                    'paid' => (int) $paid,
+                    'remaining' => (int) $remaining,
                     'status' => (bool) ($loan->total == $paid),
                     'updated_at' => now()
                 ]);

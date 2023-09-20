@@ -50,6 +50,7 @@ class ShowLoan extends Component
 
     public function updateLoan() : void
     {
+        // dd($this->interest);
         $min_amount = $this->interest >= $this->loan->interest ? $this->loan->amount : $this->loan->paid;
         $this->validate([
             'amount' => 'required|numeric|min:'.$min_amount.'',
@@ -61,7 +62,7 @@ class ShowLoan extends Component
         ]);
         [$total, $updated_remaining] = $this->recalculateLoan();
         (bool) $updated_status = $this->status;
-        if($total == $this->loan->total){
+        if((int) $total == (int) $this->loan->total){
             if($this->status != $this->loan->status){
                 $this->setStatusMsg = 'tidak bisa mengganti status untuk pinjaman yang belum sepenuhnya terbayar atau sudah terbayar';
                 return;
@@ -74,9 +75,9 @@ class ShowLoan extends Component
         try{
             DB::transaction(function() use ($total, $updated_remaining, $updated_status){
                 Loan::where('id', $this->loan->id)->update([
-                    'amount' => (float) $this->amount,
-                    'total' => (float) $total,
-                    'remaining' => (float) $updated_remaining,
+                    'amount' => (int) $this->amount,
+                    'total' => (int) $total,
+                    'remaining' => (int) $updated_remaining,
                     'interest' => $this->interest,
                     'start_date' => $this->start_date,
                     'end_date' => $this->end_date,

@@ -188,7 +188,7 @@
                     <div>
                         <label for="interest" class="block mb-2 text-sm font-medium text-gray-900">Bunga <span class="text-red-400 text-xs">*</span></label>
                         <div class="relative mb-2">
-                            <input type="number" step="any" id="interest" wire:model.defer="interest" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5" required>
+                            <input type="number" id="interest" wire:model.defer="interest" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5" required>
                             <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none">
                                 <span class="text-sm text-gray-700">%</span>
                             </div>

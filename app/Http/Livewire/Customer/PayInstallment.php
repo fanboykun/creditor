@@ -42,11 +42,11 @@ class PayInstallment extends Component
                 Installment::create([
                     'user_id' => @auth()->id(),
                     'loan_id' => $loan->id,
-                    'amount' => $this->amount
+                    'amount' => (int) $this->amount
                 ]);
                 Loan::where('id', $loan->id)->update([
-                    'paid' => (float) ($loan->paid + $this->amount),
-                    'remaining' => (float) ($loan->remaining - $this->amount),
+                    'paid' => (int) ($loan->paid + $this->amount),
+                    'remaining' => (int) ($loan->remaining - $this->amount),
                     'status' => (bool) ($loan->total == ($loan->paid + $this->amount)),
                     'updated_at' => now()
                 ]);

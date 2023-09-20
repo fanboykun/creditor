@@ -66,11 +66,11 @@ class AddLoan extends Component
                 $loan = new Loan;
                 $loan->user_id = auth()->id();
                 $loan->customer_id = $c_id;
-                $loan->amount = $this->amount;
+                $loan->amount = (int) $this->amount;
                 $loan->interest = $this->interest_rate;
-                $loan->total = $this->getTotal($this->amount, $this->interest_rate);
+                $loan->total = (int) $this->getTotal($this->amount, $this->interest_rate);
                 $loan->paid = 0;
-                $loan->remaining = $this->getTotal($this->amount, $this->interest_rate);
+                $loan->remaining = (int) $this->getTotal($this->amount, $this->interest_rate);
                 $loan->status = $this->status;
                 $loan->start_date = $this->start_date;
                 $loan->end_date = $this->end_date;

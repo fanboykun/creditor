@@ -215,8 +215,11 @@
                 <div class="w-full">
                     <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Status <span class="text-red-400 text-xs">*</span></label>
                     <select name="status" id="status" wire:model="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
-                        <option value="false" {{ $status == $loan->status ? 'selected' : '' }}>Berjalan</option>
-                        <option value="true" {{ $status == $loan->status ? 'selected' : '' }}>Selesai</option>
+                        @if($status == false)
+                        {{-- <option value="1" selected>Selesai</option> --}}
+                        <option value="0" >Berjalan</option>
+                        @endif
+                        <option value="1" selected>Selesai</option>
                     </select>
                     @error('status')
                         <span class="text-red-400 text-xs">{{ $message }}</span>

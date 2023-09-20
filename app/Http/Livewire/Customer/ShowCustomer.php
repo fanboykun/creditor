@@ -8,7 +8,6 @@ use App\Models\Installment;
 use App\Models\Loan;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
-use Psy\VersionUpdater\Installer;
 
 class ShowCustomer extends Component
 {

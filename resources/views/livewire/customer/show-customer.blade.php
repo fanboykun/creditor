@@ -78,8 +78,8 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">Nomor Ktp <span class="text-red-400 text-xs">*</span></label>
-                    <input type="number" wire:model.defer="phone" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">Phone <span class="text-red-400 text-xs">*</span></label>
+                    <input type="text" wire:model.defer="phone" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                     @error('phone')
                         <span class="text-red-400 text-sm block">{{ $message }}</span>
                     @enderror
@@ -94,7 +94,6 @@
                 <div>
                     <label for="birth_date" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Lahir</label>
                     <input type="date" wire:model.defer="birth_date" name="birth_date" id="birth_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    <span class="text-red-400 text-sm block">anu</span>
                     @error('birth_date')
                         <span class="text-red-400 text-sm block">{{ $message }}</span>
                     @enderror

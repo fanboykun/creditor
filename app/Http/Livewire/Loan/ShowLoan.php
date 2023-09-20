@@ -8,8 +8,6 @@ use App\Models\Loan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Livewire\Redirector;
-use Psy\VersionUpdater\Installer;
-use Ramsey\Uuid\Type\Decimal;
 
 class ShowLoan extends Component
 {
@@ -19,11 +17,13 @@ class ShowLoan extends Component
 
     public $start_date;
     public $end_date;
-    public $status;
+    public bool $status;
     public $note = '';
     public $duration;
     public float $amount;
     public $interest;
+
+    public $set_status;
 
     protected $listeners = ['loan-updated' => 'render', 'installment-deleted' => 'render'];
 
@@ -33,7 +33,7 @@ class ShowLoan extends Component
         $this->end_date = $loan->end_date;
         $this->amount = $loan->amount;
         $this->note = $loan->note;
-        $this->status = $loan->status;
+        $this->status = (bool) $loan->status;
         $this->duration = $loan->duration;
         $this->interest = $loan->interest;
     }
@@ -50,7 +50,7 @@ class ShowLoan extends Component
 
     public function updateLoan() : void
     {
-        $min_amount = $this->loan->paid == null ? 0 : $this->Loan->paid;
+        $min_amount = $this->interest >= $this->loan->interest ? $this->loan->amount : $this->loan->paid;
         $this->validate([
             'amount' => 'required|numeric|min:'.$min_amount.'',
             'interest' => 'required|numeric',
@@ -108,5 +108,11 @@ class ShowLoan extends Component
         }
         $this->dispatchBrowserEvent('close-modal');
         return redirect()->route('loans.index')->with('success', 'Loan Deleted Successfully!');
+    }
+
+    public function updatedStatus()
+    {
+        // dd(0 == false);
+        // dd($this->status);
     }
 }

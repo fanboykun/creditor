@@ -1,4 +1,10 @@
 <div>
+    <x-slot name="breadcrumbs">
+        Nasabah
+        <x-slot name="breadcrumbs_child">
+            Bayar Cicilan
+        </x-slot>
+    </x-slot>
     <section class="bg-gray-100 py-2">
         <div class="w-full mx-auto space-y-6 drop-shadow-lg">
             <div class="pl-4 sm:pl-8 py-2 grid sm:grid-cols-4 bg-white">

@@ -1,4 +1,10 @@
 <div>
+    <x-slot name="breadcrumbs">
+        Pinjaman
+        <x-slot name="breadcrumbs_child">
+            Tambah
+        </x-slot>
+    </x-slot>
     <section class="bg-gray-100 py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 drop-shadow-lg">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">

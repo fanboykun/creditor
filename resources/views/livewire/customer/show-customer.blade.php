@@ -1,4 +1,10 @@
 <div>
+    <x-slot name="breadcrumbs">
+        Nasabah
+        <x-slot name="breadcrumbs_child">
+            Profil
+        </x-slot>
+    </x-slot>
     <div class="bg-gray-100 py-2">
         <div class="w-full mx-auto lg:px-8 space-y-6 drop-shadow-lg">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">

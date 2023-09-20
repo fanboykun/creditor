@@ -1,4 +1,10 @@
 <div>
+    <x-slot name="breadcrumbs">
+        Nasabah
+        <x-slot name="breadcrumbs_child">
+            List
+        </x-slot>
+    </x-slot>
    <section class="bg-gray-50">
         <div class="mx-auto w-auto">
             <div x-data="{table: false}" class="relative overflow-hidden bg-white shadow-md sm:rounded-lg">

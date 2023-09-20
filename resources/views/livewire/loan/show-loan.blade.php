@@ -1,4 +1,10 @@
 <div>
+    <x-slot name="breadcrumbs">
+        Pinjaman
+        <x-slot name="breadcrumbs_child">
+            Detail
+        </x-slot>
+    </x-slot>
     <div class="bg-gray-100">
         <div class="max-w-full mx-auto space-y-6 drop-shadow-lg">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">

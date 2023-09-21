@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Livewire\Loan;
+namespace App\Livewire\Customer;
 
 use App\Models\Customer;
-use App\Models\Loan;
 use Livewire\Component;
+use App\Models\Loan;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Livewire\Redirector;
 
-class AddLoan extends Component
+class AddNewLoan extends Component
 {
-    public $customer_id = null;
+    public Customer $customer;
+
     public string $selected_customer_info;
     public int $amount;
     public float $interest_rate;
@@ -25,7 +26,7 @@ class AddLoan extends Component
     public int $duration;
 
     protected $rules = [
-        'customer_id' => 'required|integer',
+        'customer.id' => 'required|integer',
         'selected_customer_info' => 'required|string|max:255',
         'amount' => 'required|numeric',
         'interest_rate' => 'required|numeric',
@@ -35,28 +36,24 @@ class AddLoan extends Component
         'note' => 'nullable|string|max:255'
     ];
 
-    public $listeners = [
-        'customerSelected' => 'setCustomer',
-    ];
-
-    public function render() : \Illuminate\View\View
+    public function render()
     {
-        return view('livewire.loan.add-loan');
+        $this->selected_customer_info = '(' .$this->customer->id .')'. ' ' . $this->customer->name . ' - ' . $this->customer->card_number;
+        return view('livewire.customer.add-new-loan');
     }
 
     public function addNewLoan() : void
     {
         $this->validate();
-        $c_id = $this->customer_id;
-
+        $c_id = $this->customer->id;
         try{
             if($this->checkIsHaveActiveLoan($c_id)){
+                dd('cannot');
                 return;
             }
             $this->saveLoan($c_id);
         }catch(Exception $e){
             throw($e);
-            // throw new Exception('error');
         }
     }
 
@@ -66,11 +63,11 @@ class AddLoan extends Component
                 $loan = new Loan;
                 $loan->user_id = auth()->id();
                 $loan->customer_id = $c_id;
-                $loan->amount = (int) $this->amount;
+                $loan->amount = $this->amount;
                 $loan->interest = $this->interest_rate;
-                $loan->total = (int) $this->getTotal($this->amount, $this->interest_rate);
+                $loan->total = $this->getTotal($this->amount, $this->interest_rate);
                 $loan->paid = 0;
-                $loan->remaining = (int) $this->getTotal($this->amount, $this->interest_rate);
+                $loan->remaining = $this->getTotal($this->amount, $this->interest_rate);
                 $loan->status = $this->status;
                 $loan->start_date = $this->start_date;
                 $loan->end_date = $this->end_date;
@@ -82,12 +79,6 @@ class AddLoan extends Component
         }
 
         return redirect()->route('loans.index')->with('success', 'Pinjaman berhasil dibuat!');
-    }
-
-    public function setCustomer(Customer $customer) : void
-    {
-        $this->customer_id = $customer->id;
-        $this->selected_customer_info = '(' .$customer->id .')'. ' ' . $customer->name . ' - ' . $customer->card_number;
     }
 
     public function updatedIsTodaySelected() : void

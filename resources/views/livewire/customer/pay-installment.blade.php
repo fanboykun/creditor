@@ -10,7 +10,7 @@
             <div class="pl-4 sm:pl-8 py-2 grid sm:grid-cols-4 bg-white">
                 <div class="sm:col-span-3">
                     <h2 class="mb-4 text-2xl font-bold text-gray-700">Bayar Cicilan</h2>
-                    <form wire:submit.prevent="addNewInstallment()">
+                    <form wire:submit="addNewInstallment()">
                         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                             <div class="w-full">
                                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nasabah <span class="text-red-400 text-xs">*</span></label>
@@ -26,7 +26,7 @@
                                     <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                                       <span class="text-sm text-gray-700">Rp</span>
                                     </div>
-                                    <input type="number" id="amount" wire:model.defer="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" required>
+                                    <input type="number" id="amount" wire:model="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" required>
                                 </div>
                                 <span class="text-gray-400 text-xs mt-1">Sisa cicilan adalah Rp <span class="font-bold text-black text-sm"> {{ number_format($loan->remaining, 0, ',', '.') }}</span></span>
                                 @error('amount')

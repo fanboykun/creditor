@@ -37,12 +37,12 @@
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input wire:model.debounce.500ms="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari pinjaman berdasarkan id peminjaman" required="">
+                                <input wire:model.live.debounce.500ms="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari pinjaman berdasarkan id peminjaman" required="">
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3">
-                        <select wire:model.debounce.500ms="filter_status" name="filter_status" id="filter_status" class="rounded-lg">
+                        <select wire:model.live.debounce.500ms="filter_status" name="filter_status" id="filter_status" class="rounded-lg">
                             <option disabled value="">Pilih Status</option>
                             <option value="1">Lunas</option>
                             <option value="0">Belum Lunas</option>

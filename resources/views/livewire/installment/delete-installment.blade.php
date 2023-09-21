@@ -1,6 +1,6 @@
 <div>
     <div @close-modal.window="show = false">
-        <form method="post" wire:submit.prevent="destroyInstallment" class="p-6">
+        <form method="post" wire:submit="destroyInstallment" class="p-6">
 
             <h2 class="text-lg font-medium text-gray-900">
                 {{ __('Apakah anda yakin ingin menghapus cicilan ini?') }}

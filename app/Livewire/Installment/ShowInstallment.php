@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Installment;
+namespace App\Livewire\Installment;
 
 use App\Models\Installment;
 use App\Models\Loan;
@@ -21,14 +21,14 @@ class ShowInstallment extends Component
     public function init(Installment $installment)
     {
         $this->selected_installment = $installment->load('loan');
-        $this->dispatchBrowserEvent('open-modal', 'show-installment');
+        $this->dispatch('open-modal', 'show-installment');
         $this->amount = $installment->amount;
     }
 
     public function openDeleteModal()
     {
-        $this->dispatchBrowserEvent('close-modal');
-        $this->emitTo('installment.delete-installment', 'delete-installment-modal', $this->selected_installment);
+        $this->dispatch('close-modal');
+        $this->dispatch('delete-installment-modal', $this->selected_installment)->to('installment.delete-installment');
     }
 
     public function updateInstallment() : void
@@ -59,14 +59,14 @@ class ShowInstallment extends Component
         }catch(\Exception $e){
             throw($e);
         }
-        $this->emit('installments-updated');
-        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatch('installments-updated');
+        $this->dispatch('close-modal');
     }
 
     private function findUpdatedPaidAndRemaining(object $loan, float $amount, object $installment) : mixed
     {
         if($installment->amount == $amount){
-            $this->dispatchBrowserEvent('close-modal');
+            $this->dispatch('close-modal');
             $this->reset('selected_installment');
             return null;
         }elseif( $amount >= $installment->amount){

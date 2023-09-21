@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Loan;
+namespace App\Livewire\Loan;
 
 use Livewire\Component;
 use App\Models\Customer;
@@ -38,9 +38,9 @@ class SearchCustomerModal extends Component
 
     public function selectCustomer(int $customer) : void
     {
-        $this->emit('customerSelected', $customer);
+        $this->dispatch('customerSelected', $customer);
         $this->search = '';
-        $this->dispatchBrowserEvent('close');
+        $this->dispatch('close');
     }
 
 }

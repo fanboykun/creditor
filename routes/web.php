@@ -1,19 +1,19 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Livewire\Customer\AddCustomer;
-use App\Http\Livewire\Customer\AddNewLoan;
-use App\Http\Livewire\Customer\IndexCustomer;
-use App\Http\Livewire\Customer\ListInstallment;
-use App\Http\Livewire\Customer\ListLoan;
-use App\Http\Livewire\Customer\PayInstallment;
-use App\Http\Livewire\Customer\ShowCustomer;
-use App\Http\Livewire\Dashboard;
-use App\Http\Livewire\Installment\AddInstallment;
-use App\Http\Livewire\Installment\IndexInstallment;
-use App\Http\Livewire\Loan\AddLoan;
-use App\Http\Livewire\Loan\IndexLoan;
-use App\Http\Livewire\Loan\ShowLoan;
+use App\Livewire\Customer\AddCustomer;
+use App\Livewire\Customer\AddNewLoan;
+use App\Livewire\Customer\IndexCustomer;
+use App\Livewire\Customer\ListInstallment;
+use App\Livewire\Customer\ListLoan;
+use App\Livewire\Customer\PayInstallment;
+use App\Livewire\Customer\ShowCustomer;
+use App\Livewire\Dashboard;
+use App\Livewire\Installment\AddInstallment;
+use App\Livewire\Installment\IndexInstallment;
+use App\Livewire\Loan\AddLoan;
+use App\Livewire\Loan\IndexLoan;
+use App\Livewire\Loan\ShowLoan;
 use Illuminate\Support\Facades\Route;
 
 /*

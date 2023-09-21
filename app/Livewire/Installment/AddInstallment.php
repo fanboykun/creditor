@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Installment;
+namespace App\Livewire\Installment;
 
 use App\Models\Customer;
 use App\Models\Installment;
@@ -36,7 +36,7 @@ class AddInstallment extends Component
         $this->selected_loan = Loan::where('id', $loan_id)->with('installments', function($q){
             $q->limit(10);
         })->first();
-        $this->dispatchBrowserEvent('loan-selected');
+        $this->dispatch('loan-selected');
     }
 
     public function saveInstallment() : Redirector|RedirectResponse

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Loan;
+namespace App\Livewire\Loan;
 
 use Livewire\Component;
 use App\Models\Loan;

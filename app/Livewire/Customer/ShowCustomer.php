@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Customer;
+namespace App\Livewire\Customer;
 
 use Livewire\Component;
 use App\Models\Customer;
@@ -48,9 +48,9 @@ class ShowCustomer extends Component
                 'card_number' => $this->card_number,
                 'birth_date' => $this->birth_date,
             ]);
-            $this->dispatchBrowserEvent('close-modal');
+            $this->dispatch('close-modal');
             $this->resetInputField();
-            $this->emitSelf('customer-updated');
+            $this->dispatch('customer-updated')->self();
         }catch(\Exception $e){
             throw($e);
         }
@@ -58,8 +58,8 @@ class ShowCustomer extends Component
 
     public function deleteCustomer()
     {
-        $this->dispatchBrowserEvent('close-modal');
-        $this->dispatchBrowserEvent('open-modal', 'delete-customer');
+        $this->dispatch('close-modal');
+        $this->dispatch('open-modal', 'delete-customer');
     }
 
     public function destroyCustomer()
@@ -75,7 +75,7 @@ class ShowCustomer extends Component
         }catch(\Exception $e){
             throw($e);
         }
-        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatch('close-modal');
         return redirect()->route('customers.index')->with('success', 'Customer Deleted!');
     }
 

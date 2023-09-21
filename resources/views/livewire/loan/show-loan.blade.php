@@ -102,7 +102,7 @@
                                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input wire:model.debounce.500ms="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari cicilan berdasarkan id" required="">
+                                <input wire:model.live.debounce.500ms="s" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Cari cicilan berdasarkan id" required="">
                             </div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
     <x-modal name="edit-loan" x-data={} focusable>
         <div class="px-6 py-6 lg:px-8" @close-modal.window="show = false">
             <h3 class="mb-4 text-xl font-medium text-gray-900 underline">Detail Data Cicilan ({{ $loan->id }})</h3>
-            <form class="space-y-6" wire:submit.prevent="updateLoan()">
+            <form class="space-y-6" wire:submit="updateLoan()">
                 <div>
                     <label for="loan_id" class="block mb-2 text-sm font-medium text-gray-900">Nasabah</label>
                     <input type="text" value="{{ $loan->customer->name }}" disabled name="customer" id="customer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
@@ -185,7 +185,7 @@
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <span class="text-sm text-gray-700">Rp</span>
                             </div>
-                            <input type="number" id="amount" wire:model.defer="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" required>
+                            <input type="number" id="amount" wire:model="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" required>
                         </div>
                         @error('amount')
                             <span class="text-red-400 text-sm block">{{ $message }}</span>
@@ -194,7 +194,7 @@
                     <div>
                         <label for="interest" class="block mb-2 text-sm font-medium text-gray-900">Bunga <span class="text-red-400 text-xs">*</span></label>
                         <div class="relative mb-2">
-                            <input type="number" id="interest" wire:model.defer="interest" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5" required>
+                            <input type="number" id="interest" wire:model="interest" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5" required>
                             <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none">
                                 <span class="text-sm text-gray-700">%</span>
                             </div>
@@ -206,21 +206,21 @@
                 </div>
                 <div class="w-full">
                     <label for="start_date" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Dimulai Cicilan <span class="text-red-400 text-xs">*</span></label>
-                    <input type="date" name="start_date" id="start_date" required wire:model.debounce="start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                    <input type="date" name="start_date" id="start_date" required wire:model.live.debounce="start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
                     @error('start_date')
                         <span class="text-red-400 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="w-full">
                     <label for="end_date" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Akhir Cicilan <span class="text-red-400 text-xs">*</span></label>
-                    <input type="date" name="end_date" id="end_date" wire:model.debounce="end_date" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                    <input type="date" name="end_date" id="end_date" wire:model.live.debounce="end_date" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
                     @error('end_date')
                         <span class="text-red-400 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="w-full" >
                     <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Status <span class="text-red-400 text-xs">*</span></label>
-                    <select name="status" id="status" wire:model="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                    <select name="status" id="status" wire:model.live="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         @if($status == true)
                         <option value="1" {{ $loan->status == true ? 'selected' : '' }}>Selesai</option>
                         <option value="0" {{ $loan->status == false ? 'selected' : '' }}>Berjalan</option>
@@ -236,7 +236,7 @@
                 </div>
                 <div class="w-full">
                     <label for="note" class="block mb-2 text-sm font-medium text-gray-900">Catatan </label>
-                    <textarea id="note" rows="5" wire:model.defer="note" class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Masukan catatan jika ada"></textarea>
+                    <textarea id="note" rows="5" wire:model="note" class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Masukan catatan jika ada"></textarea>
                     @error('note')
                         <span class="text-red-400 text-xs">{{ $message }}</span>
                     @enderror
@@ -251,7 +251,7 @@
 
     <x-modal name="delete-loan" x-data={} focusable>
         <div @close-modal.window="show = false">
-            <form method="post" wire:submit.prevent="destroyLoan" class="p-6">
+            <form method="post" wire:submit="destroyLoan" class="p-6">
 
                 <h2 class="text-lg font-medium text-gray-900">
                     {{ __('Apakah anda yakin ingin menghapus pinjaman ini?') }}

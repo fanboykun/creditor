@@ -9,13 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 drop-shadow-lg">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <h2 class="mb-4 text-2xl font-bold text-gray-700">Tambah Peminjaman Baru</h2>
-                <form wire:submit.prevent="addNewLoan()">
+                <form wire:submit="addNewLoan()">
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         <div class="sm:col-span-2">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nasabah <span class="text-red-400 text-xs">*</span></label>
                             <div class="relative">
-                                <input type="text" readonly id="selected_customer_info" name="selected_customer_info" wire:model="selected_customer_info" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Pilih Nasabah" required>
-                                {{-- <button type="button" wire:click="$emit('openModal', 'loan.search-customer-modal')" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 ">Cari Nasabah</button> --}}
+                                <input type="text" readonly id="selected_customer_info" name="selected_customer_info" wire:model.live="selected_customer_info" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Pilih Nasabah" required>
+                                {{-- <button type="button" wire:click="$dispatch('openModal', 'loan.search-customer-modal')" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 ">Cari Nasabah</button> --}}
                                 <button x-data="" type="button" x-on:click="$dispatch('open-modal', 'search-customer', { show : true })" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 ">Cari Nasabah</button>
                             </div>
                             @error('selected_customer_info')
@@ -28,7 +28,7 @@
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                                   <span class="text-sm text-gray-700">Rp</span>
                                 </div>
-                                <input type="number" id="amount" wire:model.defer="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" required>
+                                <input type="number" id="amount" wire:model="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" required>
                             </div>
                             @error('amount')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
@@ -36,14 +36,14 @@
                         </div>
                         <div class="w-full">
                             <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Bunga <span class="text-red-400 text-xs">*</span></label>
-                            <input type="number" name="interest_rate" id="interest_rate" wire:model.defer="interest_rate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                            <input type="number" name="interest_rate" id="interest_rate" wire:model="interest_rate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
                             @error('interest_rate')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="w-full">
                             <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Dimulai Cicilan <span class="text-red-400 text-xs">*</span></label>
-                            <input type="date" name="start_date" id="start_date" required wire:model.debounce="start_date" value="{{ $start_date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                            <input type="date" name="start_date" id="start_date" required wire:model.live.debounce="start_date" value="{{ $start_date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
                             <div class="flex mt-2 ml-1">
                                 <div class="flex items-center h-5">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-1 {{ $isTodaySelected ? 'text-blue-700' : 'hidden' }} ">
@@ -63,7 +63,7 @@
                         </div>
                         <div class="w-full">
                             <label for="interest_rate" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Akhir Cicilan <span class="text-red-400 text-xs">*</span></label>
-                            <input type="date" name="end_date" id="end_date" {{ $start_date == null ? 'disabled' : ''}} wire:model.debounce="end_date" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
+                            <input type="date" name="end_date" id="end_date" {{ $start_date == null ? 'disabled' : ''}} wire:model.live.debounce="end_date" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="masukan jumlah dalam bentuk angka" required="">
                             @if($start_date != null)
                                 <div class="flex rounded-md shadow-sm drop-shadow-md mx-auto items-center justify-center px-2 py-4" role="group">
                                     <button type="button" wire:click="setEndDate(1)" class="inline-flex items-center px-4 py-2 text-sm font-medium bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 {{ $duration == 1 ? 'text-blue-700 border-blue-700' : 'text-gray-900' }}">
@@ -92,7 +92,7 @@
                         </div>
                         <div class="w-full">
                             <label for="note" class="block mb-2 text-sm font-medium text-gray-900">Catatan </label>
-                            <textarea id="note" rows="5" wire:model.defer="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Masukan catatan jika ada"></textarea>
+                            <textarea id="note" rows="5" wire:model="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Masukan catatan jika ada"></textarea>
                             @error('note')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
                             @enderror

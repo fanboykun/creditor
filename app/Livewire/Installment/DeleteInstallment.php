@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Installment;
+namespace App\Livewire\Installment;
 
 use Livewire\Component;
 use App\Models\Installment;
@@ -20,7 +20,7 @@ class DeleteInstallment extends Component
     public function init(Installment $installment)
     {
         $this->selected_installment = $installment->load('loan.customer');
-        $this->dispatchBrowserEvent('open-modal', 'delete-installment');
+        $this->dispatch('open-modal', 'delete-installment');
     }
 
     public function destroyInstallment() : void
@@ -37,8 +37,8 @@ class DeleteInstallment extends Component
                 $installment->delete();
 
             });
-            $this->emit('installment-deleted');
-            $this->dispatchBrowserEvent('close-modal');
+            $this->dispatch('installment-deleted');
+            $this->dispatch('close-modal');
 
         }catch(\Exception $e){
             throw($e);

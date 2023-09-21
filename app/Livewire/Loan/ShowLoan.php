@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Loan;
+namespace App\Livewire\Loan;
 
 use App\Models\Installment;
 use Livewire\Component;
@@ -88,8 +88,8 @@ class ShowLoan extends Component
         }catch(\Exception $e){
             throw($e);
         }
-        $this->dispatchBrowserEvent('close-modal');
-        $this->emitSelf('loan-updated');
+        $this->dispatch('close-modal');
+        $this->dispatch('loan-updated')->self();
     }
 
     private function recalculateLoan() : array
@@ -118,7 +118,7 @@ class ShowLoan extends Component
         }catch(\Exception $e){
             throw($e);
         }
-        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatch('close-modal');
         return redirect()->route('loans.index')->with('success', 'Loan Deleted Successfully!');
     }
 

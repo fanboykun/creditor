@@ -8,7 +8,7 @@ use App\Models\Customer;
 class SearchCustomerModal extends Component
 {
     public int $perPage = 10;
-    public string $search = '';
+    public $search;
 
     public bool $status =  false;
 
@@ -24,11 +24,17 @@ class SearchCustomerModal extends Component
                 ->orWhere('name', 'like', '%'.$this->search.'%')
                 ->orWhere('card_number', 'like', '%'.$this->search.'%');
         })
-        ->whereDoesntHave('loans', function($q){
-            $q->where('status', $this->status);
+        ->when($this->status == true, function ($que){
+            $que->whereHas('loans', function ($q){
+                $q->where('status', false);
+            });
+        }, function ($que){
+            $que->whereDoesntHave('loans', function($q){
+                $q->where('status', false);
+            });
         })
         ->paginate($this->perPage);
-        return view('livewire.loan.search-customer-modal', compact('customers'));
+        return view('livewire.loan.search-customer-modal', ['customers' => $customers]);
     }
 
     public function loadMore() : void

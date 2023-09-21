@@ -106,6 +106,7 @@
                             </div>
                         </div>
                     </div>
+                    @if($loan->status == false)
                     <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                         <a href="{{ route('customers.pay-installment', ['customer' => $loan?->customer, 'loan' => $loan]) }}" wire:navigate class="flex items-center justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -114,6 +115,7 @@
                             Buat Cicilan Baru
                         </a>
                     </div>
+                    @endif
                 </div>
 
                 <!-- Content -->
@@ -146,7 +148,7 @@
                                         <span class="text-sm text-gray-400 ml-1 block">Oleh : {{ $installment->user->name }}</span>
                                     </td>
                                     <td class="justify-center text-center">
-                                        <button type="button" wire:click="$emitTo('installment.show-installment', 'show-installment-modal', {installment: {{ $installment }}})" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</button>
+                                        <button type="button" wire:click="$dispatch('show-installment-modal', {installment: {{ $installment }}})" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</button>
                                     </td>
                                 </tr>
                             @empty

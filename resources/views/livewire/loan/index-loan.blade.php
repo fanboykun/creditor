@@ -98,12 +98,12 @@
                                 </td>
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap ">
                                     @if ($loan->status == true)
-                                    <div class="flex items-right">
+                                    <div class="flex items-center justify-center">
                                         <div class="inline-block w-4 h-4 mr-2 bg-green-700 rounded-full"></div>
                                         {{-- Lunas --}}
                                     </div>
                                     @else
-                                    <div class="flex items-right">
+                                    <div class="flex items-center justify-center">
                                         <div class="inline-block w-4 h-4 mr-2 bg-red-700 rounded-full"></div>
                                        {{-- Belum Lunas --}}
                                     </div>

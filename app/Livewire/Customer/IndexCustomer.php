@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class IndexCustomer extends Component
 {
-    public $s;
+    public string $s = '';
     protected $perPage = 10;
     protected $queryString = ['s' => ['except' => '']];
     public string $tab = 'grid';

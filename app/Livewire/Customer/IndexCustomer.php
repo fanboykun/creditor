@@ -24,6 +24,20 @@ class IndexCustomer extends Component
         return view('livewire.customer.index-customer', ['customers' => $customers]);
     }
 
+    public function checkActiveLoan(Customer $customer)
+    {
+        $customer->load(['loans' => function ($q){
+            $q->where('status', false);
+        }]);
+        if($customer->loans->first() != null){
+            $this->dispatch('open-modal', 'loan-active-exist');
+        }else{
+            $url = '/customers/'.$customer->id.'/new-loan';
+            return $this->redirect($url, navigate: true);
+            // return redirect()->route('customers.new-loan', $customer);
+        }
+    }
+
     public function loadMore() : void
     {
         $this->perPage += 10;

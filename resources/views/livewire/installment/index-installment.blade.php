@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <a href="{{ route('installments.create') }}" class="flex items-center justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
+                        <a href="{{ route('installments.create') }}" wire:navigate class="flex items-center justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"></path>
                             </svg>
@@ -43,8 +43,8 @@
                 </div>
 
                 <!-- Content -->
-                <div class="overflow-x-auto min-h-40 max-h-96">
-                    <table class="w-full table-auto text-sm text-left text-gray-500">
+                <div class="overflow-x-auto min-h-40 max-h-[65vh]">
+                    <table class="w-full table-auto text-sm text-left text-gray-500  sm:pb-6">
                         <thead class="w-full text-xs text-gray-700 uppercase bg-gray-50 sticky top-0 whitespace-pre-line z-10">
                             <tr class="bg-gray-50">
                                 <th scope="col" class="px-4 py-3">Nama Nasabah</th>
@@ -78,7 +78,7 @@
                                             <span class="text-sm text-gray-400 ml-1 block">Oleh : {{ $installment->user->name }}</span>
                                         </td>
                                         <td class="justify-center text-center">
-                                            <button type="button" wire:click="$emitTo('installment.show-installment', 'show-installment-modal', {installment: {{ $installment }}})" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</button>
+                                            <button type="button" x-on:click="$dispatch('show-installment-modal', {installment: {{ $installment }}})" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</button>
                                         </td>
                                     </tr>
                                     @empty

@@ -12,7 +12,7 @@
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         <div class="flex">
                             <h2 class="font-semibold text-xl text-gray-800  leading-tight">
-                                List dari Semua Cicilan <a href="{{ route('customers.profile', $customer) }}" class="underline">{{ $customer?->name }}</a>
+                                List dari Semua Cicilan <a href="{{ route('customers.profile', $customer) }}" wire:navigate class="underline">{{ $customer?->name }}</a>
                             </h2>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                 <!-- Header -->
                 <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                     <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <a href="{{ route('installments.create') }}" class="flex items-center justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
+                        <a href="{{ route('installments.create') }}" wire:navigate class="flex items-center justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"></path>
                             </svg>
@@ -64,7 +64,7 @@
                                             {{ $installment->created_at->format('H:i-l, d/F/Y') }}
                                         </td>
                                         <td class="justify-center text-center">
-                                            <button type="button" wire:click="$emitTo('installment.show-installment', 'show-installment-modal', {installment: {{ $installment }}})" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</button>
+                                            <button type="button" x-on:click="$dispatch('show-installment-modal', {installment: {{ $installment }}})" class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Detail</button>
                                         </td>
                                     </tr>
                                     @empty

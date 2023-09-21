@@ -47,7 +47,7 @@
                             <option value="1">Lunas</option>
                             <option value="0">Belum Lunas</option>
                         </select>
-                        <a href="{{ route('customers.new-loan', $customer->id) }}" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 focus:outline-none">
+                        <a href="{{ route('customers.new-loan', $customer->id) }}" wire:navigate class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 focus:outline-none">
                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                             </svg>
@@ -111,7 +111,7 @@
                                     </div>
                                 </td>
                                 <td class="px-4 py-2 text-xs break-words">
-                                    <a href="{{ route('loans.show', $loan->id) }}" class="hover:bg-blue-200 text-blue-800 text-xs font-normal mr-2 px-2.5 py-0.5 rounded-md border border-blue-400 inline-flex items-center justify-center">
+                                    <a href="{{ route('loans.show', $loan->id) }}" wire:navigate class="hover:bg-blue-200 text-blue-800 text-xs font-normal mr-2 px-2.5 py-0.5 rounded-md border border-blue-400 inline-flex items-center justify-center">
                                         Detail
                                     </a>
                                 </td>

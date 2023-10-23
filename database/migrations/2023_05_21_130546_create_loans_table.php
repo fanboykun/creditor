@@ -14,10 +14,10 @@ return new class extends Migration
         if(!Schema::hasTable('loans'))
         {
             Schema::create('loans', function (Blueprint $table) {
-                $table->engine = 'InnoDB';
+                // $table->engine = 'InnoDB';
                 $table->id();
-                $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-                $table->foreignId('customer_id')->nullable()->constrained('customers')->cascadeOnDelete();
+                $table->foreignId('user_id')->nullable()->nullOnDelete();
+                $table->foreignId('customer_id')->nullable()->cascadeOnDelete();
                 $table->double('amount')->required();
                 $table->double('interest')->nullable();
                 $table->double('total')->nullable();

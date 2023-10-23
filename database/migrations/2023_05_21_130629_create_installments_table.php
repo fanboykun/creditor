@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('installments', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+            // $table->engine = 'InnoDB';
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignId('loan_id')->nullable()->constrained('loans')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->nullOnDelete();
+            $table->foreignId('loan_id')->nullable()->cascadeOnDelete();
             $table->double('amount')->required();
             $table->softDeletes();
             $table->timestamps();

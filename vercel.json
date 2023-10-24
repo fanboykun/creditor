@@ -11,7 +11,8 @@
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
-        "APP_URL": "https://creditor.vercel.app",
+        "APP_URL": "https://creditor-dun.vercel.app",
+        "ASSET_URL": "https://creditor-dun.vercel.app/public/build/assets",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",

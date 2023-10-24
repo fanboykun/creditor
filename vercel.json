@@ -26,6 +26,5 @@
         "SESSION_DRIVER": "cookie",
         "SSR_TEMP_PATH": "/tmp/ssr",
         "NODE_PATH": "node"
-    },
-    "outputDirectory": "api"
+    }
 }

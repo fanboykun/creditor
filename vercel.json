@@ -6,20 +6,20 @@
     },
     "routes": [
         {
-        "src": "/build/(.*)",
-        "dest": "/public/build/"
+            "src": "/build/assets/(.*)",
+            "dest": "/public/build/assets/$1"
         },
         {
-        "src": "/resources/(.*)",
-        "dest": "/public/resources/"
+            "src": "/robots.txt",
+            "dest": "/public/robots.txt"
         },
         {
-        "src": "/favicon/(.*)",
-        "dest": "/public/favicon/"
+            "src": "/favicon.ico",
+            "dest": "/public/favicon.ico"
         },
         {
-        "src": "/(.*)",
-        "dest": "/api/index.php"
+            "src": "/(.*)",
+            "dest": "/api/index.php"
         }
     ],
     "env": {
@@ -27,7 +27,6 @@
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "https://creditor-dun.vercel.app",
-        "ASSET_URL": "https://creditor-dun.vercel.app",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",

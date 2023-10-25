@@ -7,6 +7,7 @@
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="icon" href="icon.ico" type="image/x-icon"/>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

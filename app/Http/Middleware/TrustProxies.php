@@ -12,7 +12,8 @@ class TrustProxies extends Middleware
      *
      * @var array<int, string>|string|null
      */
-    protected $proxies = ['https://creditor-ten.vercel.app', 'http://creditor.test'];
+    protected $proxies = '*';
+    // protected $proxies = ['https://creditor-ten.vercel.app', 'http://creditor.test'];
 
     /**
      * The headers that should be used to detect proxies.

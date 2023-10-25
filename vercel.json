@@ -25,7 +25,7 @@
     "env": {
         "APP_NAME": "Creditor",
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
+        "APP_DEBUG": "false",
         "APP_URL": "https://creditor-ten.vercel.app",
         "ASSET_URL": "https://creditor-ten.vercel.app",
 
